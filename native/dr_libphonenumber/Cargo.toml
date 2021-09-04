@@ -1,5 +1,5 @@
 [package]
-name = "dr_libphonenumber"
+name = "dr_libphonenumber_rust"
 version = "0.1.0"
 edition = "2018"
 authors = ["TabooSun <taboosun1996@gmail.com>"]
