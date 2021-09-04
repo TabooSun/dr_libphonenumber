@@ -6,6 +6,10 @@ use phonenumber::Mode;
 
 use crate::string_helper;
 
+/// We will call this stub function to prevent iOS from skipping the bundling of this library.
+#[no_mangle]
+pub extern "C" fn stub() {}
+
 #[no_mangle]
 pub extern "C" fn format(phone_number: *const c_char, iso_code: *const c_char, phone_number_format: PhoneNumberFormat) -> *mut c_char {
     let iso_code = string_helper::parse_c_char_to_str(iso_code, "iso_code");
