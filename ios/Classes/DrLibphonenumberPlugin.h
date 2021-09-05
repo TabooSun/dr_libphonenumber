@@ -28,8 +28,8 @@ typedef enum PhoneNumberFormat {
  */
 void stub(void);
 
-char *format(const char *phone_number,
-             const char *iso_code,
-             enum PhoneNumberFormat phone_number_format);
+char *format(const char *phoneNumber,
+    const char *isoCode,
+    enum PhoneNumberFormat phoneNumberFormat);
 
 void free_c_char(char *str);

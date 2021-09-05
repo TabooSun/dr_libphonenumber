@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('dr_libphonenumber');
+  const channel = MethodChannel('dr_libphonenumber');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

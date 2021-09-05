@@ -28,14 +28,14 @@ class DrLibphonenumberBindings {
   late final _dart_stub _stub = _stub_ptr.asFunction<_dart_stub>();
 
   ffi.Pointer<ffi.Int8> format(
-    ffi.Pointer<ffi.Int8> phone_number,
-    ffi.Pointer<ffi.Int8> iso_code,
-    int phone_number_format,
+    ffi.Pointer<ffi.Int8> phoneNumber,
+    ffi.Pointer<ffi.Int8> isoCode,
+    int phoneNumberFormat,
   ) {
     return _format(
-      phone_number,
-      iso_code,
-      phone_number_format,
+      phoneNumber,
+      isoCode,
+      phoneNumberFormat,
     );
   }
 
@@ -76,15 +76,15 @@ typedef _c_stub = ffi.Void Function();
 typedef _dart_stub = void Function();
 
 typedef _c_format = ffi.Pointer<ffi.Int8> Function(
-  ffi.Pointer<ffi.Int8> phone_number,
-  ffi.Pointer<ffi.Int8> iso_code,
-  ffi.Int32 phone_number_format,
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+  ffi.Int32 phoneNumberFormat,
 );
 
 typedef _dart_format = ffi.Pointer<ffi.Int8> Function(
-  ffi.Pointer<ffi.Int8> phone_number,
-  ffi.Pointer<ffi.Int8> iso_code,
-  int phone_number_format,
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+  int phoneNumberFormat,
 );
 
 typedef _c_free_c_char = ffi.Void Function(

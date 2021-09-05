@@ -1,4 +1,4 @@
-output: lib/bindings.dart
+output: lib/src/bindings.dart
 headers:
   entry-points:
     - native/dr_libphonenumber/target/bindings.h

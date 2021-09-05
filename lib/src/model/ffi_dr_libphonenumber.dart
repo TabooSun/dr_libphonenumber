@@ -1,16 +1,16 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:dr_libphonenumber/bindings.dart' hide PhoneNumberFormat;
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
-import "package:ffi/ffi.dart";
+import 'package:dr_libphonenumber/src/bindings.dart' hide PhoneNumberFormat;
+import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumber {
   final DrLibphonenumberBindings nativeLibphonenumber =
       DrLibphonenumberBindings(Platform.isAndroid
           ? DynamicLibrary.open(
-              "libdr_libphonenumber.so") // Load the dynamic library on Android
+              'libdr_libphonenumber.so') // Load the dynamic library on Android
           : DynamicLibrary.process());
 
   @override

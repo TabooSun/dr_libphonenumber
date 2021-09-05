@@ -1,5 +1,5 @@
 class PlatformChannel {
-  static const methodChannelName = "tech_creator.com/libphonenumber";
+  static const methodChannelName = 'tech_creator.com/libphonenumber';
 }
 
 class PlatformChannelMethod {
