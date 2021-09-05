@@ -4,5 +4,5 @@ headers:
     - native/dr_libphonenumber/target/bindings.h
 name: DrLibphonenumberBindings
 llvm-path:
-  - '/opt/homebrew/Cellar/llvm/12.0.1'
+  - '/usr/local/homebrew/opt/llvm'
 description: Dart bindings to call DrLibphonenumber functions
