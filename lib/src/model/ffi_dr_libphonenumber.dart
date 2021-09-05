@@ -1,19 +1,38 @@
+import 'dart:ffi';
+import 'dart:io';
+
+import 'package:dr_libphonenumber/bindings.dart' hide PhoneNumberFormat;
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
-import 'package:dr_libphonenumber/src/model/platform_channel.dart';
+import "package:ffi/ffi.dart";
 import 'package:flutter/services.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumber {
-  static const MethodChannel _channel =
-      const MethodChannel(PlatformChannel.methodChannelName);
+  final DrLibphonenumberBindings nativeLibphonenumber =
+      DrLibphonenumberBindings(Platform.isAndroid
+          ? DynamicLibrary.open(
+              "libdr_libphonenumber.so") // Load the dynamic library on Android
+          : DynamicLibrary.process());
 
   @override
-  Future<String?> format({
+  String? format({
     required String phoneNumber,
     required String isoCode,
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   }) {
-    // TODO: implement format
-    throw UnimplementedError();
+    final phoneNumberPtr = phoneNumber.toNativeUtf8().cast<Int8>();
+    final isoCodePtr = isoCode.toNativeUtf8().cast<Int8>();
+    final formattedPhoneNumberPtr = nativeLibphonenumber.format(
+      phoneNumberPtr,
+      isoCodePtr,
+      numberFormat.toDrLibphonenumberNativePhoneNumberFormat(),
+    );
+
+    final formattedPhoneNumber =
+        formattedPhoneNumberPtr.cast<Utf8>().toDartString();
+
+    nativeLibphonenumber.free_c_char(formattedPhoneNumberPtr);
+
+    return formattedPhoneNumber;
   }
 
   @override
@@ -53,7 +72,7 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
 
   @override
   void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
-    _channel.setMockMethodCallHandler(handler);
+    // DO NOTHING.
   }
 
   @override

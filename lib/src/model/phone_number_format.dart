@@ -4,5 +4,9 @@ enum PhoneNumberFormat {
   e164,
   international,
   national,
-  rfc3966
+  rfc3966,
+}
+
+extension PhoneNumberFormatExt on PhoneNumberFormat {
+  int toDrLibphonenumberNativePhoneNumberFormat() => index;
 }
