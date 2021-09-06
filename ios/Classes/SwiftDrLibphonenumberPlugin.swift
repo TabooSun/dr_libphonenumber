@@ -10,7 +10,8 @@ public class SwiftDrLibphonenumberPlugin: NSObject, FlutterPlugin {
     result(nil)
   }
 
-  public func _dummyMethodToEnforceBundling() {
-    stub()
+  public static func dummyMethodToEnforceBundling() {
+    format(nil, nil, PhoneNumberFormat.init(0))
+    free_c_char(nil)
   }
 }

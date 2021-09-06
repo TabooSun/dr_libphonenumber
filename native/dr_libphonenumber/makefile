@@ -92,6 +92,8 @@ bindings: target/bindings.h
 target/bindings.h: $(SOURCES)
 	cbindgen $^ -c cbindgen.toml | grep -v \#include | uniq > $@
 	@echo "[DONE] $@"
+	cp $@ ../../ios/Classes/DrLibPhonenumberBindings.h
+	@echo "[DONE] Copy header file to iOS folder"
 
 ## :
 

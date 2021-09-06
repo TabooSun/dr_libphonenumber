@@ -19,6 +19,7 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
     required String isoCode,
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   }) {
+    nativeLibphonenumber.stub();
     final phoneNumberPtr = phoneNumber.toNativeUtf8().cast<Int8>();
     final isoCodePtr = isoCode.toNativeUtf8().cast<Int8>();
     final formattedPhoneNumberPtr = nativeLibphonenumber.format(
@@ -28,8 +29,10 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
     );
 
     final formattedPhoneNumber =
-        formattedPhoneNumberPtr.cast<Utf8>().toDartString();
+        '${formattedPhoneNumberPtr.cast<Utf8>().toDartString()}';
 
+    calloc.free(phoneNumberPtr);
+    calloc.free(isoCodePtr);
     nativeLibphonenumber.free_c_char(formattedPhoneNumberPtr);
 
     return formattedPhoneNumber;

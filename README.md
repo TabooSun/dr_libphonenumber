@@ -40,7 +40,6 @@ Check [here](https://github.com/TabooSun/flutter-rust-ffi) for the rest.
 2. Change working directory to `native/dr_libphonenumber`
 3. Run `make clean`.
 4. Run `make all`.
-5. Copy the generated binding header file `bindings.h` and paste it to `ios/Classes/DrLibphonenumberPlugin.h`.
 6. Change working directory to the root directory of this project.
 7. Run `flutter pub run ffigen --config ffigen_config.yaml`.
 

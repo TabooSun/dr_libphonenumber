@@ -1,0 +1,22 @@
+PODS:
+  - dr_libphonenumber (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - dr_libphonenumber (from `.symlinks/plugins/dr_libphonenumber/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  dr_libphonenumber:
+    :path: ".symlinks/plugins/dr_libphonenumber/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  dr_libphonenumber: 0cd398251bf470f63b8033eb39ef74a5210caa66
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1

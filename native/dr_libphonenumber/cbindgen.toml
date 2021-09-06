@@ -1,7 +1,4 @@
 language = "C"
-autogen_warning = "// NOTE: Append the lines below to ios/Classes/DrLibphonenumberPlugin.h"
-#namespace = "ffi"
-#include_guard = "CBINDGEN_BINDINGS_H"
 
 [defines]
 "target_os = ios" = "TARGET_OS_IOS"
