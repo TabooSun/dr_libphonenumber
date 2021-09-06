@@ -1,6 +1,9 @@
+# Under development
+This plugin is still under development.
+
 # dr_libphonenumber
 
-A new Flutter project.
+A Flutter plugin that uses FFI to access [libphonenumber](https://github.com/rustonaut/rust-phonenumber).
 
 ## Getting Started
 
