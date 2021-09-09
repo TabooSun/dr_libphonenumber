@@ -11,6 +11,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String? _text;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +28,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: _runFormatNumber,
                 child: const Text('Run format number'),
               ),
+              Text(_text ?? '-'),
             ],
           ),
         ),
@@ -34,9 +37,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _runFormatNumber() {
-    print(DrLibphonenumber.instance.format(
+    _text = DrLibphonenumber.instance.format(
       phoneNumber: '0129602189',
       isoCode: 'MY',
-    ));
+    );
+    setState(() {});
   }
 }

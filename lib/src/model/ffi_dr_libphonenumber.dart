@@ -19,7 +19,6 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
     required String isoCode,
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   }) {
-    nativeLibphonenumber.stub();
     final phoneNumberPtr = phoneNumber.toNativeUtf8().cast<Int8>();
     final isoCodePtr = isoCode.toNativeUtf8().cast<Int8>();
     final formattedPhoneNumberPtr = nativeLibphonenumber.format(

@@ -19,14 +19,6 @@ class DrLibphonenumberBindings {
           lookup)
       : _lookup = lookup;
 
-  /// We will call this stub function to prevent iOS from skipping the bundling of this library.
-  void stub() {
-    return _stub();
-  }
-
-  late final _stub_ptr = _lookup<ffi.NativeFunction<_c_stub>>('stub');
-  late final _dart_stub _stub = _stub_ptr.asFunction<_dart_stub>();
-
   ffi.Pointer<ffi.Int8> format(
     ffi.Pointer<ffi.Int8> phoneNumber,
     ffi.Pointer<ffi.Int8> isoCode,
@@ -70,10 +62,6 @@ abstract class PhoneNumberFormat {
   /// RFC3966 formatting, see the RFC.
   static const int Rfc3966 = 3;
 }
-
-typedef _c_stub = ffi.Void Function();
-
-typedef _dart_stub = void Function();
 
 typedef _c_format = ffi.Pointer<ffi.Int8> Function(
   ffi.Pointer<ffi.Int8> phoneNumber,

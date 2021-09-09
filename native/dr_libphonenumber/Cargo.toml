@@ -1,11 +1,10 @@
 [package]
-name = "dr_libphonenumber_rust"
+name = "dr_libphonenumber"
 version = "0.1.0"
 edition = "2018"
 authors = ["TabooSun <taboosun1996@gmail.com>"]
 
 [lib]
-name = "dr_libphonenumber"
 crate-type = ["staticlib", "cdylib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

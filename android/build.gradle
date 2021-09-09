@@ -1,11 +1,8 @@
-group 'com.tech_creator.dr_libphonenumber.dr_libphonenumber'
-version '1.0-SNAPSHOT'
-
 buildscript {
     ext.kotlin_version = '1.3.50'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -14,10 +11,17 @@ buildscript {
     }
 }
 
+plugins {
+    id("org.mozilla.rust-android-gradle.rust-android") version "0.9.0"
+}
+
+group 'com.tech_creator.dr_libphonenumber.dr_libphonenumber'
+version '1.0-SNAPSHOT'
+
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -27,6 +31,8 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 30
 
+    ndkVersion "23.0.7599858"
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -35,6 +41,52 @@ android {
     }
 }
 
+apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
+
+def getUname() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine("uname")
+        standardOutput = stdout
+    }
+    return stdout.toString().trim().toLowerCase()
+}
+
+cargo {
+    module = "../native/dr_libphonenumber"
+    libname = "dr_libphonenumber"
+    targets = ["arm", "arm64", "x86", "x86_64"]
+    targetIncludes = ["lib${libname}.so"]
+
+    exec { spec, toolchain ->
+        def toolchainPath = "${System.getenv("ANDROID_NDK_HOME")}/toolchains/llvm/prebuilt/${getUname()}-x86_64/bin/"
+        // Overwrite the environment variable for linker: https://github.com/mozilla/rust-android-gradle/issues/39#issuecomment-682211118
+        if (toolchain.target == "armv7-linux-androideabi") {
+            spec.environment("RUST_ANDROID_GRADLE_CC", "${toolchainPath}armv7a-linux-androideabi29-clang")
+        } else if (toolchain.target == "aarch64-linux-android") {
+            spec.environment("RUST_ANDROID_GRADLE_CC", "${toolchainPath}aarch64-linux-android29-clang")
+        } else if (toolchain.target == "i686-linux-android") {
+            spec.environment("RUST_ANDROID_GRADLE_CC", "${toolchainPath}i686-linux-android29-clang")
+        } else if (toolchain.target == "x86_64-linux-android") {
+            spec.environment("RUST_ANDROID_GRADLE_CC", "${toolchainPath}x86_64-linux-android29-clang")
+        } else {
+            throw new Error("Invalid toolchain target.")
+        }
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+afterEvaluate {
+    // The `cargoBuild` task isn't available until after evaluation.
+    android.libraryVariants.all { variant ->
+        def productFlavor = ""
+        variant.productFlavors.each {
+            productFlavor += "${it.name.capitalize()}"
+        }
+        def buildType = "${variant.buildType.name.capitalize()}"
+        tasks["generate${productFlavor}${buildType}Assets"].dependsOn(tasks["cargoBuild"])
+    }
 }
