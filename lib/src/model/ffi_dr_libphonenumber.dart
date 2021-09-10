@@ -19,20 +19,24 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
     required String isoCode,
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   }) {
-    final phoneNumberPtr = phoneNumber.toNativeUtf8().cast<Int8>();
-    final isoCodePtr = isoCode.toNativeUtf8().cast<Int8>();
-    final formattedPhoneNumberPtr = nativeLibphonenumber.format(
-      phoneNumberPtr,
-      isoCodePtr,
-      numberFormat.toDrLibphonenumberNativePhoneNumberFormat(),
-    );
+    String? formattedPhoneNumber;
+    using((Arena arena) {
+      final phoneNumberPtr =
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
 
-    final formattedPhoneNumber =
-        '${formattedPhoneNumberPtr.cast<Utf8>().toDartString()}';
+      final formattedPhoneNumberPtr = arena.using(
+        nativeLibphonenumber.format(
+          phoneNumberPtr,
+          isoCodePtr,
+          numberFormat.toDrLibphonenumberNativePhoneNumberFormat(),
+        ),
+        nativeLibphonenumber.free_c_char,
+      );
 
-    calloc.free(phoneNumberPtr);
-    calloc.free(isoCodePtr);
-    nativeLibphonenumber.free_c_char(formattedPhoneNumberPtr);
+      formattedPhoneNumber =
+          '${formattedPhoneNumberPtr.cast<Utf8>().toDartString()}';
+    });
 
     return formattedPhoneNumber;
   }
