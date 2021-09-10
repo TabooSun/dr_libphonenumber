@@ -19,12 +19,14 @@ jobs:
         run: cd native/dr_libphonenumber
         
       - name: Make binaries
-        run: make all
+        run: |
+          make -v
+          make all
       
       - name: Create a release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          artifacts: "targets"
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Cleanup
