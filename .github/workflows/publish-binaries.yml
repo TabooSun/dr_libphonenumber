@@ -29,4 +29,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Cleanup
-        run: make clean
+        run: |
+          cd native/dr_libphonenumber
+          make clean
