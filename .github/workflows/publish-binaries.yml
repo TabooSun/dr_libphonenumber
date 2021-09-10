@@ -17,18 +17,19 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Make binaries
+        working-directory: native/dr_libphonenumber
         run: |
-          cd native/dr_libphonenumber
           make init
           make all
-      
+          
+      # https://github.com/ncipollo/release-action
       - name: Create a release
         uses: ncipollo/release-action@v1
         with:
+          working-directory: native/dr_libphonenumber
           artifacts: "targets"
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Cleanup
-        run: |
-          cd native/dr_libphonenumber
-          make clean
+        working-directory: native/dr_libphonenumber
+        run: make clean
