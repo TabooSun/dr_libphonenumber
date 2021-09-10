@@ -20,13 +20,20 @@ jobs:
         working-directory: native/dr_libphonenumber
         run: |
           make init
-          make all
+          make ios
+          make bindings
+          
+      - name: Zip ios artifacts
+        working-directory: native/dr_libphonenumber
+        run: |
+          zip -r artifacts.zip target/universal
+          zip -ru artifacts.zip target/bindings.h
           
       # https://github.com/ncipollo/release-action
       - name: Create a release
         uses: ncipollo/release-action@v1
         with:          
-          artifacts: "native/dr_libphonenumber/target/**"
+          artifacts: "native/dr_libphonenumber/artifacts.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Cleanup
