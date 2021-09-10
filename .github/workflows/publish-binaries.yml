@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Change working directory to dr_libphonenumber
+        run: cd native/dr_libphonenumber
+        
+      - name: Make binaries
         run: make all
       
       - name: Create a release
