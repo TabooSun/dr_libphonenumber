@@ -25,9 +25,8 @@ jobs:
       # https://github.com/ncipollo/release-action
       - name: Create a release
         uses: ncipollo/release-action@v1
-        with:
-          working-directory: native/dr_libphonenumber
-          artifacts: "target/*"
+        with:          
+          artifacts: "native/dr_libphonenumber/target/**"
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Cleanup
