@@ -1,0 +1,28 @@
+name: Publish binaries
+
+on:
+  create:
+    ref_type: tag
+    
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Change working directory to dr_libphonenumber
+        run: make all
+      
+      - name: Create a release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Cleanup
+        run: make clean
