@@ -19,6 +19,7 @@ jobs:
       - name: Make binaries
         run: |
           cd native/dr_libphonenumber
+          make init
           make all
       
       - name: Create a release
