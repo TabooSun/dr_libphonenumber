@@ -12,5 +12,7 @@ pub use crate::tests::test_dr_libphonenumber;
 
 mod utils {
     pub mod string_helper;
+    pub mod number_type;
 }
 pub use crate::utils::string_helper;
+pub use crate::utils::number_type;

@@ -7,10 +7,25 @@ enum PhoneNumberType {
   tollFree,
   premiumRate,
   sharedCost,
-  voip,
   personalNumber,
+  voip,
   pager,
   uan,
+  emergency,
   voicemail,
+  shortCode,
+  standardRate,
+  carrier,
+  noInternational,
   unknown
+}
+
+extension PhoneNumberTypeExt on PhoneNumberType {
+  int toDrLibphonenumberNativePhoneNumberType() => index;
+}
+
+class PhoneNumberTypeHelper {
+  static PhoneNumberType parse(int type) {
+    return PhoneNumberType.values[type];
+  }
 }

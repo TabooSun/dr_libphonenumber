@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dr_libphonenumber/dr_libphonenumber.dart';
 
 void main() {
   const channel = MethodChannel('dr_libphonenumber');
@@ -17,7 +16,5 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-
-  });
+  test('getPlatformVersion', () async {});
 }

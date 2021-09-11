@@ -2,7 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
-import 'package:dr_libphonenumber/src/bindings.dart' hide PhoneNumberFormat;
+import 'package:dr_libphonenumber/src/bindings.dart'
+    hide PhoneNumberFormat, PhoneNumberType;
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
@@ -42,21 +43,20 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   }
 
   @override
-  Future<String?> formatAsYouType({
+  PhoneNumberType getNumberType({
     required String phoneNumber,
     required String isoCode,
   }) {
-    // TODO: implement formatAsYouType
-    throw UnimplementedError();
-  }
+    var phoneNumberType = PhoneNumberType.unknown;
+    using((Arena arena) {
+      final phoneNumberPtr =
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
 
-  @override
-  Future<PhoneNumberType> getNumberType({
-    required String phoneNumber,
-    required String isoCode,
-  }) {
-    // TODO: implement getNumberType
-    throw UnimplementedError();
+      phoneNumberType = PhoneNumberTypeHelper.parse(
+          nativeLibphonenumber.getNumberType(phoneNumberPtr, isoCodePtr));
+    });
+    return phoneNumberType;
   }
 
   @override

@@ -34,6 +34,21 @@ class DrLibphonenumberBindings {
   late final _format_ptr = _lookup<ffi.NativeFunction<_c_format>>('format');
   late final _dart_format _format = _format_ptr.asFunction<_dart_format>();
 
+  int getNumberType(
+    ffi.Pointer<ffi.Int8> phoneNumber,
+    ffi.Pointer<ffi.Int8> isoCode,
+  ) {
+    return _getNumberType(
+      phoneNumber,
+      isoCode,
+    );
+  }
+
+  late final _getNumberType_ptr =
+      _lookup<ffi.NativeFunction<_c_getNumberType>>('getNumberType');
+  late final _dart_getNumberType _getNumberType =
+      _getNumberType_ptr.asFunction<_dart_getNumberType>();
+
   void free_c_char(
     ffi.Pointer<ffi.Int8> str,
   ) {
@@ -63,6 +78,67 @@ abstract class PhoneNumberFormat {
   static const int Rfc3966 = 3;
 }
 
+abstract class PhoneNumberType {
+  ///
+  static const int FixedLine = 0;
+
+  ///
+  static const int Mobile = 1;
+
+  /// In some regions (e.g. the USA), it is impossible to distinguish between
+  /// fixed-line and mobile numbers by looking at the phone number itself.
+  static const int FixedLineOrMobile = 2;
+
+  /// Freephone lines.
+  static const int TollFree = 3;
+
+  ///
+  static const int PremiumRate = 4;
+
+  /// The cost of this call is shared between the caller and the recipient, and
+  /// is hence typically less than PREMIUM_RATE calls. See
+  /// http://en.wikipedia.org/wiki/Shared_Cost_Service for more information.
+  static const int SharedCost = 5;
+
+  /// A personal number is associated with a particular person, and may be
+  /// routed to either a MOBILE or FIXED_LINE number. Some more information can
+  /// be found here: http://en.wikipedia.org/wiki/Personal_Numbers
+  static const int PersonalNumber = 6;
+
+  /// Voice over IP numbers. This includes TSoIP (Telephony Service over IP).
+  static const int Voip = 7;
+
+  ///
+  static const int Pager = 8;
+
+  /// Used for "Universal Access Numbers" or "Company Numbers". They may be
+  /// further routed to specific offices, but allow one number to be used for a
+  /// company.
+  static const int Uan = 9;
+
+  ///
+  static const int Emergency = 10;
+
+  /// Used for "Voice Mail Access Numbers".
+  static const int Voicemail = 11;
+
+  ///
+  static const int ShortCode = 12;
+
+  ///
+  static const int StandardRate = 13;
+
+  ///
+  static const int Carrier = 14;
+
+  ///
+  static const int NoInternational = 15;
+
+  /// A phone number is of type UNKNOWN when it does not fit any of the known
+  /// patterns for a specific region.
+  static const int Unknown = 16;
+}
+
 typedef _c_format = ffi.Pointer<ffi.Int8> Function(
   ffi.Pointer<ffi.Int8> phoneNumber,
   ffi.Pointer<ffi.Int8> isoCode,
@@ -73,6 +149,16 @@ typedef _dart_format = ffi.Pointer<ffi.Int8> Function(
   ffi.Pointer<ffi.Int8> phoneNumber,
   ffi.Pointer<ffi.Int8> isoCode,
   int phoneNumberFormat,
+);
+
+typedef _c_getNumberType = ffi.Int32 Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+);
+
+typedef _dart_getNumberType = int Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
 );
 
 typedef _c_free_c_char = ffi.Void Function(

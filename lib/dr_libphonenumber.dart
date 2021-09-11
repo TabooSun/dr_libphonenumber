@@ -31,12 +31,7 @@ abstract class DrLibphonenumber {
     required String isoCode,
   });
 
-  Future<PhoneNumberType> getNumberType({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  Future<String?> formatAsYouType({
+  PhoneNumberType getNumberType({
     required String phoneNumber,
     required String isoCode,
   });
