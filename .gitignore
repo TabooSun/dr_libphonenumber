@@ -13,3 +13,9 @@ target/
 Cargo.lock
 
 *.iml
+
+android/github.properties
+
+example/android/github.properties
+
+ios/.build/

@@ -13,10 +13,7 @@ A new Flutter project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Tech Creator' => 'taboosun1996@gmail.com' }
   s.source           = { :path => '.' }
-  s.public_header_files = 'Classes**/*.h'
   s.source_files = 'Classes/**/*'
-  s.static_framework = true
-  s.vendored_libraries = "libdr_libphonenumber.a"
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
 
