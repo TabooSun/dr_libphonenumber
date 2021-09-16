@@ -42,32 +42,14 @@ Check [here](https://github.com/TabooSun/flutter-rust-ffi) for the rest.
 
 ### Note: Each of the changing working directory steps below is referenced from the root directory. 
 
-### iOS
+### Build
 1. Change working directory to `native/dr_libphonenumber`.
 2. Run `make clean`.
-3. Run `make ios`.
+3. Run `make all`.
 4. Run `make bindings`.
 5. Run `make archive`.
 
-### Android
-1. Change working directory to `android/`
-2. Uncomment all `mavenLocal()` in project level `build.gradle`.
-3. Change working directory to `native/DrLibPhonenumberAndroidBundler`.
-4. Run `./gradlew publishReleasePublicationToMavenLocal`.
+Change the third step to android or ios if for some reason you want to build only specific platform.
 
 ## Generate Dart bindings
 1. Run `flutter pub run ffigen --config ffigen_config.yaml`.
-
-## Publish (For author reference only)
-Update the version in `native/DrLibPhonenumberAndroidBundler/dr_lib_phonenumber_android_bundler/build.gradle`.
-As in:
-```groovy
-publishing {
-    publications {
-        release(MavenPublication) {
-            ...
-            version = "1.0"
-        }
-    }
-}
-```
