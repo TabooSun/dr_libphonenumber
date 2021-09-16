@@ -11,6 +11,8 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   final DrLibphonenumberBindings nativeLibphonenumber =
       DrLibphonenumberBindings(Platform.isAndroid
           ? (DynamicLibrary.open('libdr_libphonenumber.so')
+            // Load the library. Our library is not that large, loading it here
+            // should not be having any performance problem.
             ..providesSymbol('')) // Load the dynamic library on Android
           : DynamicLibrary.process());
 
