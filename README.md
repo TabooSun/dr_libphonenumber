@@ -47,6 +47,7 @@ Check [here](https://github.com/TabooSun/flutter-rust-ffi) for the rest.
 2. Run `make clean`.
 3. Run `make ios`.
 4. Run `make bindings`.
+5. Run `make archive`.
 
 ### Android
 1. Change working directory to `android/`

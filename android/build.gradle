@@ -2,7 +2,6 @@ buildscript {
     ext.kotlin_version = '1.5.30'
     repositories {
         google()
-//        mavenLocal()
         mavenCentral()
     }
 
@@ -18,7 +17,6 @@ version '1.0-SNAPSHOT'
 rootProject.allprojects {
     repositories {
         google()
-//        mavenLocal()
         mavenCentral()
     }
 }
@@ -57,7 +55,5 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'com.github.TabooSun:dr_lib_phonenumber_android_bundler:1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version
 }

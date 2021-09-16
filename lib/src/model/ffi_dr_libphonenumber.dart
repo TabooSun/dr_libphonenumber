@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 class FfiDrLibphonenumber extends DrLibphonenumber {
   final DrLibphonenumberBindings nativeLibphonenumber =
       DrLibphonenumberBindings(Platform.isAndroid
-          ? DynamicLibrary.open(
-              'libdr_libphonenumber.so') // Load the dynamic library on Android
+          ? (DynamicLibrary.open('libdr_libphonenumber.so')
+            ..providesSymbol('')) // Load the dynamic library on Android
           : DynamicLibrary.process());
 
   @override
