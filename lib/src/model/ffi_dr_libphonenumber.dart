@@ -34,7 +34,7 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
           isoCodePtr,
           numberFormat.toDrLibphonenumberNativePhoneNumberFormat(),
         ),
-        nativeLibphonenumber.free_c_char,
+        nativeLibphonenumber.freeCChar,
       );
 
       formattedPhoneNumber =
@@ -62,15 +62,23 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   }
 
   @override
-  Future<String?> getRegionCodeForCountryCode(
+  String? getRegionCodeForCountryCode(
     int callingCode,
   ) {
-    // TODO: implement getRegionCodeForCountryCode
-    throw UnimplementedError();
+    String? regionCode;
+    using((Arena arena) {
+      final regionCodePtr = arena.using(
+        nativeLibphonenumber.getRegionCodeForCountryCode(callingCode),
+        nativeLibphonenumber.freeCChar,
+      );
+      regionCode = '${regionCodePtr.cast<Utf8>().toDartString()}';
+
+    });
+    return regionCode;
   }
 
   @override
-  Future<RegionInfo> getRegionInfo({
+  RegionInfo getRegionInfo({
     required String phoneNumber,
     required String isoCode,
   }) {
@@ -81,10 +89,11 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   @override
   void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
     // DO NOTHING.
+    // We should try to archive Desktop version for testing.
   }
 
   @override
-  Future<bool?> isValidPhoneNumber({
+  bool? isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
   }) {
@@ -93,7 +102,7 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   }
 
   @override
-  Future<String?> normalizePhoneNumber({
+  String? normalizePhoneNumber({
     required String phoneNumber,
     required String isoCode,
   }) {

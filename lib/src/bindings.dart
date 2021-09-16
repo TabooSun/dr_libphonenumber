@@ -49,18 +49,115 @@ class DrLibphonenumberBindings {
   late final _dart_getNumberType _getNumberType =
       _getNumberType_ptr.asFunction<_dart_getNumberType>();
 
-  void free_c_char(
+  ffi.Pointer<ffi.Int8> getRegionCodeForCountryCode(
+    int callingCode,
+  ) {
+    return _getRegionCodeForCountryCode(
+      callingCode,
+    );
+  }
+
+  late final _getRegionCodeForCountryCode_ptr =
+      _lookup<ffi.NativeFunction<_c_getRegionCodeForCountryCode>>(
+          'getRegionCodeForCountryCode');
+  late final _dart_getRegionCodeForCountryCode _getRegionCodeForCountryCode =
+      _getRegionCodeForCountryCode_ptr
+          .asFunction<_dart_getRegionCodeForCountryCode>();
+
+  void freeCChar(
     ffi.Pointer<ffi.Int8> str,
   ) {
-    return _free_c_char(
+    return _freeCChar(
       str,
     );
   }
 
-  late final _free_c_char_ptr =
-      _lookup<ffi.NativeFunction<_c_free_c_char>>('free_c_char');
-  late final _dart_free_c_char _free_c_char =
-      _free_c_char_ptr.asFunction<_dart_free_c_char>();
+  late final _freeCChar_ptr =
+      _lookup<ffi.NativeFunction<_c_freeCChar>>('freeCChar');
+  late final _dart_freeCChar _freeCChar =
+      _freeCChar_ptr.asFunction<_dart_freeCChar>();
+}
+
+class __darwin_pthread_handler_rec extends ffi.Struct {
+  external ffi.Pointer<ffi.NativeFunction<_typedefC_1>> __routine;
+
+  external ffi.Pointer<ffi.Void> __arg;
+
+  external ffi.Pointer<__darwin_pthread_handler_rec> __next;
+}
+
+class _opaque_pthread_attr_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_cond_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([40])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_condattr_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_mutex_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_mutexattr_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_once_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_rwlock_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([192])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_rwlockattr_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Int8> __opaque;
+}
+
+class _opaque_pthread_t extends ffi.Struct {
+  @ffi.Int64()
+  external int __sig;
+
+  external ffi.Pointer<__darwin_pthread_handler_rec> __cleanup_stack;
+
+  @ffi.Array.multi([8176])
+  external ffi.Array<ffi.Int8> __opaque;
 }
 
 abstract class PhoneNumberFormat {
@@ -139,6 +236,170 @@ abstract class PhoneNumberType {
   static const int Unknown = 16;
 }
 
+const int __WORDSIZE = 64;
+
+const int __DARWIN_ONLY_64_BIT_INO_T = 0;
+
+const int __DARWIN_ONLY_UNIX_CONFORMANCE = 1;
+
+const int __DARWIN_ONLY_VERS_1050 = 0;
+
+const int __DARWIN_UNIX03 = 1;
+
+const int __DARWIN_64_BIT_INO_T = 1;
+
+const int __DARWIN_VERS_1050 = 1;
+
+const int __DARWIN_NON_CANCELABLE = 0;
+
+const String __DARWIN_SUF_64_BIT_INO_T = '\$INODE64';
+
+const String __DARWIN_SUF_1050 = '\$1050';
+
+const String __DARWIN_SUF_EXTSN = '\$DARWIN_EXTSN';
+
+const int __DARWIN_C_ANSI = 4096;
+
+const int __DARWIN_C_FULL = 900000;
+
+const int __DARWIN_C_LEVEL = 900000;
+
+const int __STDC_WANT_LIB_EXT1__ = 1;
+
+const int __DARWIN_NO_LONG_LONG = 0;
+
+const int _DARWIN_FEATURE_64_BIT_INODE = 1;
+
+const int _DARWIN_FEATURE_ONLY_UNIX_CONFORMANCE = 1;
+
+const int _DARWIN_FEATURE_UNIX_CONFORMANCE = 3;
+
+const int __DARWIN_NULL = 0;
+
+const int __PTHREAD_SIZE__ = 8176;
+
+const int __PTHREAD_ATTR_SIZE__ = 56;
+
+const int __PTHREAD_MUTEXATTR_SIZE__ = 8;
+
+const int __PTHREAD_MUTEX_SIZE__ = 56;
+
+const int __PTHREAD_CONDATTR_SIZE__ = 8;
+
+const int __PTHREAD_COND_SIZE__ = 40;
+
+const int __PTHREAD_ONCE_SIZE__ = 8;
+
+const int __PTHREAD_RWLOCK_SIZE__ = 192;
+
+const int __PTHREAD_RWLOCKATTR_SIZE__ = 16;
+
+const int USER_ADDR_NULL = 0;
+
+const int INT8_MAX = 127;
+
+const int INT16_MAX = 32767;
+
+const int INT32_MAX = 2147483647;
+
+const int INT64_MAX = 9223372036854775807;
+
+const int INT8_MIN = -128;
+
+const int INT16_MIN = -32768;
+
+const int INT32_MIN = -2147483648;
+
+const int INT64_MIN = -9223372036854775808;
+
+const int UINT8_MAX = 255;
+
+const int UINT16_MAX = 65535;
+
+const int UINT32_MAX = 4294967295;
+
+const int UINT64_MAX = -1;
+
+const int INT_LEAST8_MIN = -128;
+
+const int INT_LEAST16_MIN = -32768;
+
+const int INT_LEAST32_MIN = -2147483648;
+
+const int INT_LEAST64_MIN = -9223372036854775808;
+
+const int INT_LEAST8_MAX = 127;
+
+const int INT_LEAST16_MAX = 32767;
+
+const int INT_LEAST32_MAX = 2147483647;
+
+const int INT_LEAST64_MAX = 9223372036854775807;
+
+const int UINT_LEAST8_MAX = 255;
+
+const int UINT_LEAST16_MAX = 65535;
+
+const int UINT_LEAST32_MAX = 4294967295;
+
+const int UINT_LEAST64_MAX = -1;
+
+const int INT_FAST8_MIN = -128;
+
+const int INT_FAST16_MIN = -32768;
+
+const int INT_FAST32_MIN = -2147483648;
+
+const int INT_FAST64_MIN = -9223372036854775808;
+
+const int INT_FAST8_MAX = 127;
+
+const int INT_FAST16_MAX = 32767;
+
+const int INT_FAST32_MAX = 2147483647;
+
+const int INT_FAST64_MAX = 9223372036854775807;
+
+const int UINT_FAST8_MAX = 255;
+
+const int UINT_FAST16_MAX = 65535;
+
+const int UINT_FAST32_MAX = 4294967295;
+
+const int UINT_FAST64_MAX = -1;
+
+const int INTPTR_MAX = 9223372036854775807;
+
+const int INTPTR_MIN = -9223372036854775808;
+
+const int UINTPTR_MAX = -1;
+
+const int INTMAX_MAX = 9223372036854775807;
+
+const int UINTMAX_MAX = -1;
+
+const int INTMAX_MIN = -9223372036854775808;
+
+const int PTRDIFF_MIN = -9223372036854775808;
+
+const int PTRDIFF_MAX = 9223372036854775807;
+
+const int SIZE_MAX = -1;
+
+const int RSIZE_MAX = 9223372036854775807;
+
+const int WCHAR_MAX = 2147483647;
+
+const int WCHAR_MIN = -2147483648;
+
+const int WINT_MIN = -2147483648;
+
+const int WINT_MAX = 2147483647;
+
+const int SIG_ATOMIC_MIN = -2147483648;
+
+const int SIG_ATOMIC_MAX = 2147483647;
+
 typedef _c_format = ffi.Pointer<ffi.Int8> Function(
   ffi.Pointer<ffi.Int8> phoneNumber,
   ffi.Pointer<ffi.Int8> isoCode,
@@ -161,10 +422,22 @@ typedef _dart_getNumberType = int Function(
   ffi.Pointer<ffi.Int8> isoCode,
 );
 
-typedef _c_free_c_char = ffi.Void Function(
+typedef _c_getRegionCodeForCountryCode = ffi.Pointer<ffi.Int8> Function(
+  ffi.Uint16 callingCode,
+);
+
+typedef _dart_getRegionCodeForCountryCode = ffi.Pointer<ffi.Int8> Function(
+  int callingCode,
+);
+
+typedef _c_freeCChar = ffi.Void Function(
   ffi.Pointer<ffi.Int8> str,
 );
 
-typedef _dart_free_c_char = void Function(
+typedef _dart_freeCChar = void Function(
   ffi.Pointer<ffi.Int8> str,
+);
+
+typedef _typedefC_1 = ffi.Void Function(
+  ffi.Pointer<ffi.Void>,
 );

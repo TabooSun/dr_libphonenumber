@@ -16,17 +16,17 @@ abstract class DrLibphonenumber {
 
   static final DrLibphonenumber instance = FfiDrLibphonenumber();
 
-  Future<bool?> isValidPhoneNumber({
+  bool? isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
   });
 
-  Future<String?> normalizePhoneNumber({
+  String? normalizePhoneNumber({
     required String phoneNumber,
     required String isoCode,
   });
 
-  Future<RegionInfo> getRegionInfo({
+  RegionInfo getRegionInfo({
     required String phoneNumber,
     required String isoCode,
   });
@@ -42,5 +42,5 @@ abstract class DrLibphonenumber {
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   });
 
-  Future<String?> getRegionCodeForCountryCode(int callingCode);
+  String? getRegionCodeForCountryCode(int callingCode);
 }

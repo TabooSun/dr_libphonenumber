@@ -107,4 +107,4 @@ enum PhoneNumberType getNumberType(const char *phoneNumber, const char *isoCode)
 
 char *getRegionCodeForCountryCode(uint16_t callingCode);
 
-void free_c_char(char *str);
+void freeCChar(char *str);

@@ -14,6 +14,6 @@ public class SwiftDrLibphonenumberPlugin: NSObject, FlutterPlugin {
     format(nil, nil, PhoneNumberFormat.init(0))
     getNumberType(nil, nil)
     getRegionCodeForCountryCode(60)
-    free_c_char(nil)
+    freeCChar(nil)
   }
 }
