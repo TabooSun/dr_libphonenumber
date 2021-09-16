@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 typedef enum PhoneNumberFormat {
   /**
@@ -103,5 +104,7 @@ char *format(const char *phoneNumber,
              enum PhoneNumberFormat phoneNumberFormat);
 
 enum PhoneNumberType getNumberType(const char *phoneNumber, const char *isoCode);
+
+char *getRegionCodeForCountryCode(uint16_t callingCode);
 
 void free_c_char(char *str);

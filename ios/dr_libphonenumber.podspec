@@ -13,8 +13,14 @@ A new Flutter project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Tech Creator' => 'taboosun1996@gmail.com' }
   s.source           = { :path => '.' }
+  s.public_header_files = 'Classes**/*.h'
   s.source_files = 'Classes/**/*'
+  s.static_framework = true
+  s.vendored_libraries = "*.a"
+
   s.dependency 'Flutter'
+  s.static_framework = true
+
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.
