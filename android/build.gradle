@@ -34,25 +34,6 @@ android {
         minSdkVersion 21
     }
 }
-repositories {
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/TabooSun/dr_libphonenumber_rust")
-        credentials {
-            def githubProperties = new Properties()
-            def githubPropertiesFile = rootProject.file('github.properties')
-            if (githubPropertiesFile.exists()) {
-                githubPropertiesFile.withReader('UTF-8') { reader ->
-                    githubProperties.load(reader)
-                }
-            } else {
-                throw new Error("Could not find github.properties. Please create one with gpr.user and gpr.key.")
-            }
-            username = githubProperties["gpr.user"] ?: System.getenv("USERNAME")
-            password = githubProperties["gpr.key"] ?: System.getenv("TOKEN")
-        }
-    }
-}
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
