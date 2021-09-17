@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
 import 'package:dr_libphonenumber/src/bindings.dart'
-    hide PhoneNumberFormat, PhoneNumberType;
+    hide PhoneNumberFormat, PhoneNumberType, RegionInfo;
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
@@ -72,18 +72,34 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
         nativeLibphonenumber.freeCChar,
       );
       regionCode = '${regionCodePtr.cast<Utf8>().toDartString()}';
-
     });
     return regionCode;
   }
 
   @override
-  RegionInfo getRegionInfo({
+  RegionInfo? getRegionInfo({
     required String phoneNumber,
     required String isoCode,
   }) {
-    // TODO: implement getRegionInfo
-    throw UnimplementedError();
+    RegionInfo? regionInfo;
+    using((Arena arena) {
+      final phoneNumberPtr =
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+
+      final regionInfoPtr = arena.using(
+        nativeLibphonenumber.getRegionInfo(phoneNumberPtr, isoCodePtr),
+        nativeLibphonenumber.freeRegionInfo,
+      );
+
+      regionInfo = RegionInfo(
+        regionCode: regionInfoPtr.ref.regionCode,
+        countryCode: regionInfoPtr.ref.countryCode.cast<Utf8>().toDartString(),
+        phoneNumberValue: regionInfoPtr.ref.phoneNumberValue,
+        formattedPhoneNumber: regionInfoPtr.ref.formattedNumber.cast<Utf8>().toDartString(),
+      );
+    });
+    return regionInfo;
   }
 
   @override

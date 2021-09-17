@@ -99,6 +99,31 @@ typedef enum PhoneNumberType {
   Unknown,
 } PhoneNumberType;
 
+/**
+ * Check https://countrycode.org/ for detail.
+ */
+typedef struct RegionInfo {
+  /**
+   * The region code or calling code.
+   */
+  uint16_t regionCode;
+  /**
+   * The phone number excluding the [region_code].
+   */
+  uint64_t phoneNumberValue;
+  /**
+   * The country code.
+   */
+  char *countryCode;
+  /**
+   * The formatted phone number with combination of [region_code] & [phone_number_value].
+   */
+  char *formattedNumber;
+} RegionInfo;
+
+/**
+ * Format the [phone_number] using the [phone_number_format].
+ */
 char *format(const char *phoneNumber,
              const char *isoCode,
              enum PhoneNumberFormat phoneNumberFormat);
@@ -107,4 +132,8 @@ enum PhoneNumberType getNumberType(const char *phoneNumber, const char *isoCode)
 
 char *getRegionCodeForCountryCode(uint16_t callingCode);
 
+struct RegionInfo *getRegionInfo(const char *phoneNumber, const char *isoCode);
+
 void freeCChar(char *str);
+
+void freeRegionInfo(struct RegionInfo *unsafeStruct);

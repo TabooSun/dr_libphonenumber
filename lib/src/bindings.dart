@@ -19,6 +19,7 @@ class DrLibphonenumberBindings {
           lookup)
       : _lookup = lookup;
 
+  /// Format the [phone_number] using the [phone_number_format].
   ffi.Pointer<ffi.Int8> format(
     ffi.Pointer<ffi.Int8> phoneNumber,
     ffi.Pointer<ffi.Int8> isoCode,
@@ -64,6 +65,21 @@ class DrLibphonenumberBindings {
       _getRegionCodeForCountryCode_ptr
           .asFunction<_dart_getRegionCodeForCountryCode>();
 
+  ffi.Pointer<RegionInfo> getRegionInfo(
+    ffi.Pointer<ffi.Int8> phoneNumber,
+    ffi.Pointer<ffi.Int8> isoCode,
+  ) {
+    return _getRegionInfo(
+      phoneNumber,
+      isoCode,
+    );
+  }
+
+  late final _getRegionInfo_ptr =
+      _lookup<ffi.NativeFunction<_c_getRegionInfo>>('getRegionInfo');
+  late final _dart_getRegionInfo _getRegionInfo =
+      _getRegionInfo_ptr.asFunction<_dart_getRegionInfo>();
+
   void freeCChar(
     ffi.Pointer<ffi.Int8> str,
   ) {
@@ -76,6 +92,19 @@ class DrLibphonenumberBindings {
       _lookup<ffi.NativeFunction<_c_freeCChar>>('freeCChar');
   late final _dart_freeCChar _freeCChar =
       _freeCChar_ptr.asFunction<_dart_freeCChar>();
+
+  void freeRegionInfo(
+    ffi.Pointer<RegionInfo> unsafeStruct,
+  ) {
+    return _freeRegionInfo(
+      unsafeStruct,
+    );
+  }
+
+  late final _freeRegionInfo_ptr =
+      _lookup<ffi.NativeFunction<_c_freeRegionInfo>>('freeRegionInfo');
+  late final _dart_freeRegionInfo _freeRegionInfo =
+      _freeRegionInfo_ptr.asFunction<_dart_freeRegionInfo>();
 }
 
 class __darwin_pthread_handler_rec extends ffi.Struct {
@@ -234,6 +263,23 @@ abstract class PhoneNumberType {
   /// A phone number is of type UNKNOWN when it does not fit any of the known
   /// patterns for a specific region.
   static const int Unknown = 16;
+}
+
+/// Check https://countrycode.org/ for detail.
+class RegionInfo extends ffi.Struct {
+  /// The region code or calling code.
+  @ffi.Uint16()
+  external int regionCode;
+
+  /// The phone number excluding the [region_code].
+  @ffi.Uint64()
+  external int phoneNumberValue;
+
+  /// The country code.
+  external ffi.Pointer<ffi.Int8> countryCode;
+
+  /// The formatted phone number with combination of [region_code] & [phone_number_value].
+  external ffi.Pointer<ffi.Int8> formattedNumber;
 }
 
 const int __WORDSIZE = 64;
@@ -430,12 +476,30 @@ typedef _dart_getRegionCodeForCountryCode = ffi.Pointer<ffi.Int8> Function(
   int callingCode,
 );
 
+typedef _c_getRegionInfo = ffi.Pointer<RegionInfo> Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+);
+
+typedef _dart_getRegionInfo = ffi.Pointer<RegionInfo> Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+);
+
 typedef _c_freeCChar = ffi.Void Function(
   ffi.Pointer<ffi.Int8> str,
 );
 
 typedef _dart_freeCChar = void Function(
   ffi.Pointer<ffi.Int8> str,
+);
+
+typedef _c_freeRegionInfo = ffi.Void Function(
+  ffi.Pointer<RegionInfo> unsafeStruct,
+);
+
+typedef _dart_freeRegionInfo = void Function(
+  ffi.Pointer<RegionInfo> unsafeStruct,
 );
 
 typedef _typedefC_1 = ffi.Void Function(

@@ -26,7 +26,7 @@ abstract class DrLibphonenumber {
     required String isoCode,
   });
 
-  RegionInfo getRegionInfo({
+  RegionInfo? getRegionInfo({
     required String phoneNumber,
     required String isoCode,
   });

@@ -1,18 +1,28 @@
 part of dr_libphonenumber;
 
+/// Check https://countrycode.org/ for detail.
 class RegionInfo {
-  String? regionPrefix;
-  String? isoCode;
-  String? formattedPhoneNumber;
+  /// The region code or calling code.
+  final int regionCode;
+
+  /// The phone number excluding the [regionCode].
+  final int phoneNumberValue;
+
+  /// The country code.
+  final String? countryCode;
+
+  /// The formatted phone number with combination of [regionCode] & [phoneNumberValue].
+  final String? formattedPhoneNumber;
 
   RegionInfo({
-    this.regionPrefix,
-    this.isoCode,
+    this.regionCode = 0,
+    this.phoneNumberValue = 0,
+    this.countryCode,
     this.formattedPhoneNumber,
   });
 
   @override
   String toString() {
-    return '[RegionInfo prefix=$regionPrefix, iso=$isoCode, formatted=$formattedPhoneNumber]';
+    return '[RegionInfo prefix=$regionCode, phoneNumberValue=$phoneNumberValue, iso=$countryCode, formatted=$formattedPhoneNumber]';
   }
 }
