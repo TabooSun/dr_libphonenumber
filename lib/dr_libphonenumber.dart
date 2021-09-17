@@ -16,7 +16,7 @@ abstract class DrLibphonenumber {
 
   static final DrLibphonenumber instance = FfiDrLibphonenumber();
 
-  bool? isValidPhoneNumber({
+  bool isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
   });

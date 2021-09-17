@@ -80,6 +80,21 @@ class DrLibphonenumberBindings {
   late final _dart_getRegionInfo _getRegionInfo =
       _getRegionInfo_ptr.asFunction<_dart_getRegionInfo>();
 
+  int isValidPhoneNumber(
+    ffi.Pointer<ffi.Int8> phoneNumber,
+    ffi.Pointer<ffi.Int8> isoCode,
+  ) {
+    return _isValidPhoneNumber(
+      phoneNumber,
+      isoCode,
+    );
+  }
+
+  late final _isValidPhoneNumber_ptr =
+      _lookup<ffi.NativeFunction<_c_isValidPhoneNumber>>('isValidPhoneNumber');
+  late final _dart_isValidPhoneNumber _isValidPhoneNumber =
+      _isValidPhoneNumber_ptr.asFunction<_dart_isValidPhoneNumber>();
+
   void freeCChar(
     ffi.Pointer<ffi.Int8> str,
   ) {
@@ -482,6 +497,16 @@ typedef _c_getRegionInfo = ffi.Pointer<RegionInfo> Function(
 );
 
 typedef _dart_getRegionInfo = ffi.Pointer<RegionInfo> Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+);
+
+typedef _c_isValidPhoneNumber = ffi.Int32 Function(
+  ffi.Pointer<ffi.Int8> phoneNumber,
+  ffi.Pointer<ffi.Int8> isoCode,
+);
+
+typedef _dart_isValidPhoneNumber = int Function(
   ffi.Pointer<ffi.Int8> phoneNumber,
   ffi.Pointer<ffi.Int8> isoCode,
 );

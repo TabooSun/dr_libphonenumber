@@ -19,3 +19,5 @@ android/github.properties
 example/android/github.properties
 
 ios/.build/
+
+tool/playground/

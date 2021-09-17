@@ -134,6 +134,8 @@ char *getRegionCodeForCountryCode(uint16_t callingCode);
 
 struct RegionInfo *getRegionInfo(const char *phoneNumber, const char *isoCode);
 
+bool isValidPhoneNumber(const char *phoneNumber, const char *isoCode);
+
 void freeCChar(char *str);
 
 void freeRegionInfo(struct RegionInfo *unsafeStruct);

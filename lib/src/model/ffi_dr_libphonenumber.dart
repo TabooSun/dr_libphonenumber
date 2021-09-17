@@ -96,7 +96,8 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
         regionCode: regionInfoPtr.ref.regionCode,
         countryCode: regionInfoPtr.ref.countryCode.cast<Utf8>().toDartString(),
         phoneNumberValue: regionInfoPtr.ref.phoneNumberValue,
-        formattedPhoneNumber: regionInfoPtr.ref.formattedNumber.cast<Utf8>().toDartString(),
+        formattedPhoneNumber:
+            regionInfoPtr.ref.formattedNumber.cast<Utf8>().toDartString(),
       );
     });
     return regionInfo;
@@ -109,12 +110,21 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
   }
 
   @override
-  bool? isValidPhoneNumber({
+  bool isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
   }) {
-    // TODO: implement isValidPhoneNumber
-    throw UnimplementedError();
+    var isValidPhoneNumber = false;
+    using((Arena arena) {
+      final phoneNumberPtr =
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+
+      isValidPhoneNumber =
+          nativeLibphonenumber.isValidPhoneNumber(phoneNumberPtr, isoCodePtr) ==
+              1;
+    });
+    return isValidPhoneNumber;
   }
 
   @override
@@ -122,7 +132,10 @@ class FfiDrLibphonenumber extends DrLibphonenumber {
     required String phoneNumber,
     required String isoCode,
   }) {
-    // TODO: implement normalizePhoneNumber
-    throw UnimplementedError();
+    return format(
+      phoneNumber: phoneNumber,
+      isoCode: isoCode,
+      numberFormat: PhoneNumberFormat.e164,
+    );
   }
 }
