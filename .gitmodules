@@ -1,3 +1,0 @@
-[submodule "native"]
-	path = native
-	url = git@github.com:TabooSun/dr_libphonenumber_rust.git
