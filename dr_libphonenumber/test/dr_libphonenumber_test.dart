@@ -1,8 +1,8 @@
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
+import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  DrLibphonenumber.instance.toString();
   const phoneNumber = '0129602189';
   const isoCode = 'MY';
   group('Format phone number', () {
@@ -10,7 +10,7 @@ void main() {
       'Format phone number in e164 format.',
       () {
         expect(
-          DrLibphonenumber.instance.format(
+          DrLibphonenumber.format(
             phoneNumber: phoneNumber,
             isoCode: isoCode,
             numberFormat: PhoneNumberFormat.e164,
@@ -23,7 +23,7 @@ void main() {
       'Format phone number in international format.',
       () {
         expect(
-          DrLibphonenumber.instance.format(
+          DrLibphonenumber.format(
             phoneNumber: phoneNumber,
             isoCode: isoCode,
             numberFormat: PhoneNumberFormat.international,
@@ -36,7 +36,7 @@ void main() {
       'Format phone number in international format.',
       () {
         expect(
-          DrLibphonenumber.instance.format(
+          DrLibphonenumber.format(
             phoneNumber: phoneNumber,
             isoCode: isoCode,
             numberFormat: PhoneNumberFormat.national,
@@ -49,7 +49,7 @@ void main() {
       'Format phone number in international format.',
       () {
         expect(
-          DrLibphonenumber.instance.format(
+          DrLibphonenumber.format(
             phoneNumber: phoneNumber,
             isoCode: isoCode,
             numberFormat: PhoneNumberFormat.rfc3966,
@@ -62,7 +62,7 @@ void main() {
       'Format phone number with lowercase iso code.',
       () {
         expect(
-          DrLibphonenumber.instance.format(
+          DrLibphonenumber.format(
             phoneNumber: phoneNumber,
             isoCode: isoCode.toLowerCase(),
             numberFormat: PhoneNumberFormat.international,
@@ -77,7 +77,7 @@ void main() {
     'Get number type from phone number and iso code.',
     () {
       expect(
-        DrLibphonenumber.instance.getNumberType(
+        DrLibphonenumber.getNumberType(
           phoneNumber: phoneNumber,
           isoCode: isoCode.toLowerCase(),
         ),
@@ -89,7 +89,7 @@ void main() {
     'Get region code from country code.',
     () {
       expect(
-        DrLibphonenumber.instance.getRegionCodeForCountryCode(60),
+        DrLibphonenumber.getRegionCodeForCountryCode(60),
         isoCode,
       );
     },
@@ -98,7 +98,7 @@ void main() {
     'Get region info from phone number and iso code.',
     () {
       expect(
-        DrLibphonenumber.instance.getRegionInfo(
+        DrLibphonenumber.getRegionInfo(
           phoneNumber: phoneNumber,
           isoCode: isoCode,
         ),

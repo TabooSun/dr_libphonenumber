@@ -2,47 +2,11 @@ library dr_libphonenumber;
 
 import 'dart:async';
 
-import 'package:dr_libphonenumber/src/dr_libphonenumber_web.dart';
-import 'package:dr_libphonenumber/src/model/ffi_dr_libphonenumber.dart';
-import 'package:equatable/equatable.dart';
+import 'package:dr_libphonenumber/src/ffi_dr_libphonenumber_stub.dart'
+    if (dart.library.io) 'package:dr_libphonenumber/src/ffi_dr_libphonenumber.dart'
+    if (dart.library.html) 'package:dr_libphonenumber/src/web_dr_libphonenumber.dart';
+import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-part 'src/model/phone_number_format.dart';
-part 'src/model/phone_number_type.dart';
-part 'src/model/region_info.dart';
-
-abstract class DrLibphonenumber {
-  @visibleForTesting
-  void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler);
-
-  static final DrLibphonenumber instance = kIsWeb ? DrLibphonenumberWeb() : FfiDrLibphonenumber();
-
-  bool isValidPhoneNumber({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  String? normalizePhoneNumber({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  RegionInfo? getRegionInfo({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  PhoneNumberType getNumberType({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  String? format({
-    required String phoneNumber,
-    required String isoCode,
-    PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
-  });
-
-  String? getRegionCodeForCountryCode(int callingCode);
-}
+part 'src/dr_libphonenumber.dart';

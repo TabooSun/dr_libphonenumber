@@ -1,13 +1,13 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:dr_libphonenumber/dr_libphonenumber.dart';
 import 'package:dr_libphonenumber/src/bindings.dart'
     hide PhoneNumberFormat, PhoneNumberType, RegionInfo;
+import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 
-class FfiDrLibphonenumber extends DrLibphonenumber {
+class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   final DrLibphonenumberBindings nativeLibphonenumber =
       DrLibphonenumberBindings(_constructDynamicLibrary());
 

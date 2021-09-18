@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _runFormatNumber() {
-    _text = DrLibphonenumber.instance.format(
+    _text = DrLibphonenumber.format(
       phoneNumber: '0129602189',
       isoCode: 'MY',
     );

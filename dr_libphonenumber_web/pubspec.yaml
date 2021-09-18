@@ -1,0 +1,37 @@
+name: dr_libphonenumber_web
+description: A simple command-line application.
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.14.0 <3.0.0'
+  flutter: ">=1.17.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  js: ^0.6.3
+  dr_libphonenumber_platform_interface:
+    git:
+      url: https://github.com/TabooSun/dr_libphonenumber.git
+      ref: v0.0.1
+      path: libphonenumber_platform_interface
+
+dependency_overrides:
+  dr_libphonenumber_platform_interface:
+    path: ../dr_libphonenumber_platform_interface
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^1.0.0
+
+flutter:
+  plugin:
+    platforms:
+      web:
+        pluginClass: DrLibphonenumberWeb
+        fileName: dr_libphonenumber_web.dart

@@ -1,18 +1,14 @@
 import 'dart:async';
 
-import 'package:dr_libphonenumber/dr_libphonenumber.dart';
-import 'package:dr_libphonenumber/src/libphonenumber_js.dart';
+import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
+import 'package:dr_libphonenumber_web/src/libphonenumber_js.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 /// A web implementation of the DrLibphonenumber plugin.
-class DrLibphonenumberWeb extends DrLibphonenumber {
+class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   static void registerWith(Registrar registrar) {
-    final channel = MethodChannel(
-      'dr_libphonenumber',
-      const StandardMethodCodec(),
-      registrar,
-    );
+    DrLibphonenumberPlatform.instance = DrLibphonenumberWeb();
   }
 
   PhoneNumberUtil? _phoneNumberUtil;
@@ -66,16 +62,27 @@ class DrLibphonenumberWeb extends DrLibphonenumber {
   }
 
   @override
-  bool isValidPhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
-    // TODO: implement isValidPhoneNumber
-    throw UnimplementedError();
+  bool isValidPhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
+    return phoneNumberUtil.isValidNumber(
+      phoneNumberUtil.parse(
+        phoneNumber,
+        isoCode.toUpperCase(),
+      ),
+    );
   }
 
   @override
-  String? normalizePhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
-    // TODO: implement normalizePhoneNumber
-    throw UnimplementedError();
+  String? normalizePhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
+    return format(
+      phoneNumber: phoneNumber,
+      isoCode: isoCode,
+      numberFormat: PhoneNumberFormat.e164,
+    );
   }
 }

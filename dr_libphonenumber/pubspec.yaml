@@ -1,7 +1,6 @@
 name: dr_libphonenumber
 description: A new Flutter project.
 version: 0.0.1
-homepage:
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -14,6 +13,23 @@ dependencies:
     sdk: flutter
   ffi: ^1.1.2
   equatable: ^2.0.3
+  dr_libphonenumber_platform_interface:
+    git:
+      url: https://github.com/TabooSun/dr_libphonenumber.git
+      ref: v0.0.1
+      path: libphonenumber_platform_interface
+
+  dr_libphonenumber_web:
+    git:
+      url: https://github.com/TabooSun/dr_libphonenumber.git
+      ref: v0.0.1
+      path: libphonenumber_web
+
+dependency_overrides:
+  dr_libphonenumber_platform_interface:
+    path: ../dr_libphonenumber_platform_interface
+  dr_libphonenumber_web:
+    path: ../dr_libphonenumber_web
 
 dev_dependencies:
   pedantic: ^1.11.0
@@ -40,8 +56,7 @@ flutter:
       macos:
         pluginClass: DrLibphonenumberPlugin
       web:
-        pluginClass: DrLibphonenumberWeb
-        fileName: dr_libphonenumber_web.dart
+        default_package: dr_libphonenumber_web
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

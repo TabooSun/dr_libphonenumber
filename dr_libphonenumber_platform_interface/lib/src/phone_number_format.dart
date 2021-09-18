@@ -1,4 +1,4 @@
-part of dr_libphonenumber;
+part of libphonenumber_platform_interface;
 
 enum PhoneNumberFormat {
   e164,

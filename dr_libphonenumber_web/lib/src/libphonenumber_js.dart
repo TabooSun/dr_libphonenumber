@@ -1,8 +1,8 @@
 @JS()
 library libphonenumber;
 
+import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:js/js.dart';
-import 'package:dr_libphonenumber/dr_libphonenumber.dart';
 
 @JS('libphonenumber.PhoneNumberUtil')
 class PhoneNumberUtil {
@@ -24,8 +24,7 @@ class PhoneNumberUtil {
   /// - [phoneNumber] - The phone number to be formatted.
   /// - [phoneNumberFormat] - Use the [PhoneNumberFormat.index].
   @JS()
-  external String format(
-      PhoneNumber phoneNumber, int phoneNumberFormat);
+  external String format(PhoneNumber phoneNumber, int phoneNumberFormat);
 
   /// Get number type of [phoneNumber].
   ///

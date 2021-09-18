@@ -1,4 +1,4 @@
-part of dr_libphonenumber;
+part of libphonenumber_platform_interface;
 
 /// Check https://countrycode.org/ for detail.
 class RegionInfo with EquatableMixin {
