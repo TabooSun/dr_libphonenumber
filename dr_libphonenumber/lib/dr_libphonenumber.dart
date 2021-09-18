@@ -9,4 +9,14 @@ import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+export 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart'
+    show
+        RegionInfo,
+        PhoneNumberType,
+        PhoneNumberFormat,
+        PhoneNumberTypeHelper,
+        DrLibphonenumberPlatform,
+        PhoneNumberTypeExt,
+        PhoneNumberFormatExt;
+
 part 'src/dr_libphonenumber.dart';
