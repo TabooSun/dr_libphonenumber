@@ -3,6 +3,7 @@ library dr_libphonenumber;
 import 'dart:async';
 
 import 'package:dr_libphonenumber/src/model/ffi_dr_libphonenumber.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 

@@ -9,12 +9,28 @@ import 'package:flutter/services.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumber {
   final DrLibphonenumberBindings nativeLibphonenumber =
-      DrLibphonenumberBindings(Platform.isAndroid
-          ? (DynamicLibrary.open('libdr_libphonenumber.so')
-            // Load the library. Our library is not that large, loading it here
-            // should not be having any performance problem.
-            ..providesSymbol('')) // Load the dynamic library on Android
-          : DynamicLibrary.process());
+      DrLibphonenumberBindings(_constructDynamicLibrary());
+
+  static DynamicLibrary _constructDynamicLibrary() {
+    if (Platform.isAndroid) {
+      return DynamicLibrary.open('libdr_libphonenumber.so')
+        // Load the library. Our library is not that large, loading it here
+        // should not be having any performance problem.
+        ..providesSymbol('');
+    }
+
+    if (Platform.isMacOS) {
+      const libPath =
+          'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
+      if (!File(libPath).existsSync()) {
+        throw Exception('$libPath not found.');
+      }
+
+      return DynamicLibrary.open(libPath);
+    }
+
+    return DynamicLibrary.process();
+  }
 
   @override
   String? format({

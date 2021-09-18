@@ -1,7 +1,7 @@
 part of dr_libphonenumber;
 
 /// Check https://countrycode.org/ for detail.
-class RegionInfo {
+class RegionInfo with EquatableMixin {
   /// The region code or calling code.
   final int regionCode;
 
@@ -14,15 +14,21 @@ class RegionInfo {
   /// The formatted phone number with combination of [regionCode] & [phoneNumberValue].
   final String? formattedPhoneNumber;
 
+  @override
+  List<Object?> get props => [
+        regionCode,
+        phoneNumberValue,
+        countryCode,
+        formattedPhoneNumber,
+      ];
+
+  @override
+  bool? get stringify => true;
+
   RegionInfo({
     this.regionCode = 0,
     this.phoneNumberValue = 0,
     this.countryCode,
     this.formattedPhoneNumber,
   });
-
-  @override
-  String toString() {
-    return '[RegionInfo prefix=$regionCode, phoneNumberValue=$phoneNumberValue, iso=$countryCode, formatted=$formattedPhoneNumber]';
-  }
 }
