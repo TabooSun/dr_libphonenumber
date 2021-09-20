@@ -4,10 +4,10 @@ A Flutter plugin that uses FFI to access [libphonenumber](https://github.com/rus
 
 ## Getting started
 
-###Android
+### Android
 This plugin works out of the box.
 
-###iOS
+### iOS
 - The static library will be stripped in release mode. Follow [this](https://flutter.dev/docs/development/platform-integration/c-interop#ios-symbols-stripped)
 to prevent.
 - This library does not support `armv7` and `armv7s`. Therefore, you need to configure the build target to support only arm64.
