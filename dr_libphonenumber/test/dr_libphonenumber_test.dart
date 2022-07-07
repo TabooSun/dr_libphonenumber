@@ -1,5 +1,4 @@
 import 'package:dr_libphonenumber/dr_libphonenumber.dart';
-import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -72,7 +71,7 @@ void main() {
       },
     );
   });
-  
+
   test(
     'Get number type from phone number and iso code.',
     () {

@@ -21,13 +21,17 @@ it. Alternatively, you can also create a PR to contribute.
 
 ## Contribution
 
+Download NDK (version 22.0.7026061) from Android Studio SDK manager.
+
 Set Android NDK environment:
 
 ```shell
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
-export ANDROID_NDK_HOME=/Users/$USER/Library/Android/sdk/ndk-bundle
+export ANDROID_NDK_HOME=/Users/$USER/Library/Android/sdk/ndk/22.0.7026061
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK_HOME
 ```
+
+Change the working directory to `dr_libphonenumber/native/dr_libphonenumber`:
 
 Run the following commands to get started.
 

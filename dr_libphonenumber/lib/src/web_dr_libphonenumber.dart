@@ -1,5 +1,5 @@
 import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
-import 'package:flutter/src/services/message_codec.dart';
+import 'package:flutter/services.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   @override
@@ -39,14 +39,18 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   }
 
   @override
-  bool isValidPhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
+  bool isValidPhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     throw UnimplementedError();
   }
 
   @override
-  String? normalizePhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
+  String? normalizePhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     throw UnimplementedError();
   }
 }

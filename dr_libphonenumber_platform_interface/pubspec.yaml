@@ -15,4 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lints: ^1.0.0
+  taboosun_lints:
+    git:
+      url: https://github.com/TabooSun/dart_taboosun_lints.git
+      ref: v1.1.3

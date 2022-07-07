@@ -3,9 +3,12 @@ import 'dart:io';
 
 import 'package:dr_libphonenumber/src/bindings.dart'
     hide PhoneNumberFormat, PhoneNumberType, RegionInfo;
+import 'package:dr_libphonenumber/src/bindings.dart' as bindings
+    show RegionInfo;
 import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
+import 'package:quiver/strings.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   final DrLibphonenumberBindings nativeLibphonenumber =
@@ -41,20 +44,26 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     String? formattedPhoneNumber;
     using((Arena arena) {
       final phoneNumberPtr =
-          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
-      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
-      final formattedPhoneNumberPtr = arena.using(
+      final formattedPhoneNumberPtr =
+          arena.using<Pointer<LibPhoneNumberResult_c_char>>(
         nativeLibphonenumber.format(
           phoneNumberPtr,
           isoCodePtr,
           numberFormat.toDrLibphonenumberNativePhoneNumberFormat(),
         ),
-        nativeLibphonenumber.freeCChar,
+        (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
 
+      final errorValue = formattedPhoneNumberPtr.ref.error.cast<Utf8>().toDartString();
+      if (isNotBlank(errorValue)) {
+        throw DrLibphonenumberException(errorValue);
+      }
+
       formattedPhoneNumber =
-          '${formattedPhoneNumberPtr.cast<Utf8>().toDartString()}';
+          formattedPhoneNumberPtr.ref.data.cast<Utf8>().toDartString();
     });
 
     return formattedPhoneNumber;
@@ -68,11 +77,12 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     var phoneNumberType = PhoneNumberType.unknown;
     using((Arena arena) {
       final phoneNumberPtr =
-          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
-      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
       phoneNumberType = PhoneNumberTypeHelper.parse(
-          nativeLibphonenumber.getNumberType(phoneNumberPtr, isoCodePtr));
+        nativeLibphonenumber.get_number_type(phoneNumberPtr, isoCodePtr),
+      );
     });
     return phoneNumberType;
   }
@@ -83,11 +93,11 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   ) {
     String? regionCode;
     using((Arena arena) {
-      final regionCodePtr = arena.using(
+      final regionCodePtr = arena.using<Pointer<Char>>(
         nativeLibphonenumber.getRegionCodeForCountryCode(callingCode),
-        nativeLibphonenumber.freeCChar,
+        (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
-      regionCode = '${regionCodePtr.cast<Utf8>().toDartString()}';
+      regionCode = regionCodePtr.cast<Utf8>().toDartString();
     });
     return regionCode;
   }
@@ -100,12 +110,12 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     RegionInfo? regionInfo;
     using((Arena arena) {
       final phoneNumberPtr =
-          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
-      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
-      final regionInfoPtr = arena.using(
+      final regionInfoPtr = arena.using<Pointer<bindings.RegionInfo>>(
         nativeLibphonenumber.getRegionInfo(phoneNumberPtr, isoCodePtr),
-        nativeLibphonenumber.freeRegionInfo,
+        (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
 
       regionInfo = RegionInfo(
@@ -133,8 +143,8 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     var isValidPhoneNumber = false;
     using((Arena arena) {
       final phoneNumberPtr =
-          phoneNumber.toNativeUtf8(allocator: arena).cast<Int8>();
-      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Int8>();
+          phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
+      final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
       isValidPhoneNumber =
           nativeLibphonenumber.isValidPhoneNumber(phoneNumberPtr, isoCodePtr) ==

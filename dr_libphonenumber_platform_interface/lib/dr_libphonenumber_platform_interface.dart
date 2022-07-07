@@ -13,6 +13,8 @@ part 'src/phone_number_type.dart';
 
 part 'src/region_info.dart';
 
+part 'src/exceptions/dr_libphonenumber_exception.dart';
+
 abstract class DrLibphonenumberPlatform extends PlatformInterface {
   static final Object _token = Object();
 

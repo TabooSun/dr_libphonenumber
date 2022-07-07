@@ -39,14 +39,18 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   }
 
   @override
-  bool isValidPhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
+  bool isValidPhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     throw UnimplementedError();
   }
 
   @override
-  String? normalizePhoneNumber(
-      {required String phoneNumber, required String isoCode}) {
+  String? normalizePhoneNumber({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     throw UnimplementedError();
   }
 }

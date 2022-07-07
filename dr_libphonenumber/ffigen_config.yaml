@@ -6,3 +6,5 @@ name: DrLibphonenumberBindings
 llvm-path:
   - '/usr/local/homebrew/opt/llvm'
 description: Dart bindings to call DrLibphonenumber functions
+preamble: |
+  // ignore_for_file: require_trailing_commas, unused_element, non_constant_identifier_names, camel_case_types, unused_field, constant_identifier_names

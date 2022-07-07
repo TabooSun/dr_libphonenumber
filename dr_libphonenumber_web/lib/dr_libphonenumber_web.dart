@@ -29,8 +29,10 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }
 
   @override
-  PhoneNumberType getNumberType(
-      {required String phoneNumber, required String isoCode}) {
+  PhoneNumberType getNumberType({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     return PhoneNumberType.values[phoneNumberUtil.getNumberType(
       phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
       isoCode,
@@ -43,8 +45,10 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }
 
   @override
-  RegionInfo? getRegionInfo(
-      {required String phoneNumber, required String isoCode}) {
+  RegionInfo? getRegionInfo({
+    required String phoneNumber,
+    required String isoCode,
+  }) {
     final telNumber = phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase());
 
     return RegionInfo(

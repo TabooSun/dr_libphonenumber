@@ -13,8 +13,8 @@ class PlatformChannelMethod {
 }
 
 class PlatformChannelArg {
-  static const phone_number = 'phone_number';
-  static const iso_code = 'iso_code';
+  static const phoneNumber = 'phone_number';
+  static const isoCode = 'iso_code';
   static const numberFormat = 'number_format';
-  static const callingCode  = 'calling_code';
+  static const callingCode = 'calling_code';
 }
