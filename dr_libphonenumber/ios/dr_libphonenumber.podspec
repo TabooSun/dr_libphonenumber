@@ -15,15 +15,17 @@ A new Flutter project.
   s.source           = { :path => '.' }
   s.public_header_files = 'Classes**/*.h'
   s.source_files = 'Classes/**/*'
-  s.static_framework = true
-  s.vendored_libraries = "*.a"
+  s.vendored_frameworks = 'DrLibPhonenumber.xcframework'
+  s.ios.vendored_frameworks = 'DrLibPhonenumber.xcframework'
 
   s.dependency 'Flutter'
-  s.static_framework = true
 
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  s.pod_target_xcconfig = {
+        'DEFINES_MODULE' => 'YES',
+        'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386',
+  }
   s.swift_version = '5.0'
 end

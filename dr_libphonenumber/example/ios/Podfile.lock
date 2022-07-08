@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  dr_libphonenumber: 77d798efe147ecaa28658128bff90aaebc757a6b
+  dr_libphonenumber: 167e3219780ec70646628ae93ca74f286fc73433
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
