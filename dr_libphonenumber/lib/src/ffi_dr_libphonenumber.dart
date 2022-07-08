@@ -23,7 +23,9 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
       const libPath =
           'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
       if (!File(libPath).existsSync()) {
-        throw Exception('$libPath not found.');
+        throw Exception(
+          '$libPath not found. Please make sure that you have built all the Rust targets.',
+        );
       }
 
       return DynamicLibrary.open(libPath);

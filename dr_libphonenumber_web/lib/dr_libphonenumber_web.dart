@@ -22,10 +22,14 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String isoCode,
     PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
   }) {
-    return phoneNumberUtil.format(
-      phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
-      numberFormat.index,
-    );
+    try {
+      return phoneNumberUtil.format(
+            phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
+            numberFormat.index,
+          );
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
   }
 
   @override
@@ -33,15 +37,23 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String phoneNumber,
     required String isoCode,
   }) {
-    return PhoneNumberType.values[phoneNumberUtil.getNumberType(
-      phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
-      isoCode,
-    )];
+    try {
+      return PhoneNumberType.values[phoneNumberUtil.getNumberType(
+            phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
+            isoCode,
+          )];
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
   }
 
   @override
   String? getRegionCodeForCountryCode(int callingCode) {
-    return phoneNumberUtil.getRegionCodeForCountryCode(callingCode);
+    try {
+      return phoneNumberUtil.getRegionCodeForCountryCode(callingCode);
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
   }
 
   @override
@@ -49,20 +61,19 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String phoneNumber,
     required String isoCode,
   }) {
-    final telNumber = phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase());
+    try {
+      final telNumber = phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase());
 
-    return RegionInfo(
-      formattedPhoneNumber:
-          phoneNumberUtil.format(telNumber, PhoneNumberFormat.national.index),
-      phoneNumberValue: telNumber.getNationalNumber(),
-      countryCode: phoneNumberUtil.getRegionCodeForNumber(telNumber),
-      regionCode: telNumber.getCountryCode(),
-    );
-  }
-
-  @override
-  void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
-    // DO NOTHING
+      return RegionInfo(
+            formattedPhoneNumber:
+                phoneNumberUtil.format(telNumber, PhoneNumberFormat.national.index),
+            phoneNumberValue: telNumber.getNationalNumber(),
+            countryCode: phoneNumberUtil.getRegionCodeForNumber(telNumber),
+            regionCode: telNumber.getCountryCode(),
+          );
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
   }
 
   @override
@@ -70,12 +81,16 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String phoneNumber,
     required String isoCode,
   }) {
-    return phoneNumberUtil.isValidNumber(
-      phoneNumberUtil.parse(
-        phoneNumber,
-        isoCode.toUpperCase(),
-      ),
-    );
+    try {
+      return phoneNumberUtil.isValidNumber(
+            phoneNumberUtil.parse(
+              phoneNumber,
+              isoCode.toUpperCase(),
+            ),
+          );
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
   }
 
   @override
@@ -83,10 +98,19 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String phoneNumber,
     required String isoCode,
   }) {
-    return format(
-      phoneNumber: phoneNumber,
-      isoCode: isoCode,
-      numberFormat: PhoneNumberFormat.e164,
-    );
+    try {
+      return format(
+            phoneNumber: phoneNumber,
+            isoCode: isoCode,
+            numberFormat: PhoneNumberFormat.e164,
+          );
+    } catch (e) {
+      throw DrLibphonenumberException(e.toString());
+    }
+  }
+
+  @override
+  void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
+    // DO NOTHING
   }
 }

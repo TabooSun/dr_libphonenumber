@@ -17,6 +17,7 @@ export 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_
         PhoneNumberTypeHelper,
         DrLibphonenumberPlatform,
         PhoneNumberTypeExt,
-        PhoneNumberFormatExt;
+        PhoneNumberFormatExt,
+        DrLibphonenumberException;
 
 part 'src/dr_libphonenumber.dart';

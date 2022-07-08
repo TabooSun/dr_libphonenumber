@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
     _text = DrLibphonenumber.format(
       phoneNumber: '0129602189',
       isoCode: 'MY',
+      numberFormat: PhoneNumberFormat.e164,
     );
     setState(() {});
   }
