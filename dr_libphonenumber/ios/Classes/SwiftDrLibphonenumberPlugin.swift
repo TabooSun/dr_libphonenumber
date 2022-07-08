@@ -11,14 +11,14 @@ public class SwiftDrLibphonenumberPlugin: NSObject, FlutterPlugin {
   }
 
   public static func dummyMethodToEnforceBundling() {
-    format(nil, nil, PhoneNumberFormat.init(0))
-    getNumberType(nil, nil)
-    getRegionCodeForCountryCode(60)
-    getRegionInfo(nil, nil)
-    isValidPhoneNumber(nil, nil)
+    format(nil, nil, DrPhoneNumberFormat.init(0))
+    format_as_you_type(nil, nil, DrPhoneNumberFormat.init(0))
+    get_number_type(nil, nil)
+    get_region_code_for_country_code(60)
+    get_region_info(nil, nil)
+    is_valid_phone_number(nil, nil)
 
     // Free memory.
-    freeCChar(nil)
-    freeRegionInfo(nil)
+    free_memory(nil)
   }
 }

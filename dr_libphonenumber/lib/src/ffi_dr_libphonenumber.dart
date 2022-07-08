@@ -1,10 +1,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:dr_libphonenumber/src/bindings.dart'
-    hide PhoneNumberFormat, PhoneNumberType, RegionInfo;
-import 'package:dr_libphonenumber/src/bindings.dart' as bindings
-    show RegionInfo;
+import 'package:dr_libphonenumber/src/bindings.dart';
 import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +45,7 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
       final formattedPhoneNumberPtr =
-          arena.using<Pointer<LibPhoneNumberResult_c_char>>(
+          arena.using<Pointer<MutableLibPhoneNumberResult_c_char>>(
         nativeLibphonenumber.format(
           phoneNumberPtr,
           isoCodePtr,
@@ -57,10 +54,7 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
         (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
 
-      final errorValue = formattedPhoneNumberPtr.ref.error.cast<Utf8>().toDartString();
-      if (isNotBlank(errorValue)) {
-        throw DrLibphonenumberException(errorValue);
-      }
+      _handleFfiError(formattedPhoneNumberPtr.ref.error);
 
       formattedPhoneNumber =
           formattedPhoneNumberPtr.ref.data.cast<Utf8>().toDartString();
@@ -80,8 +74,12 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
           phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
+      final result =
+          nativeLibphonenumber.get_number_type(phoneNumberPtr, isoCodePtr);
+      _handleFfiError(result.ref.error);
+
       phoneNumberType = PhoneNumberTypeHelper.parse(
-        nativeLibphonenumber.get_number_type(phoneNumberPtr, isoCodePtr),
+        result.ref.data,
       );
     });
     return phoneNumberType;
@@ -93,11 +91,13 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   ) {
     String? regionCode;
     using((Arena arena) {
-      final regionCodePtr = arena.using<Pointer<Char>>(
-        nativeLibphonenumber.getRegionCodeForCountryCode(callingCode),
+      final regionCodePtr =
+          arena.using<Pointer<MutableLibPhoneNumberResult_c_char>>(
+        nativeLibphonenumber.get_region_code_for_country_code(callingCode),
         (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
-      regionCode = regionCodePtr.cast<Utf8>().toDartString();
+      _handleFfiError(regionCodePtr.ref.error);
+      regionCode = regionCodePtr.ref.data.cast<Utf8>().toDartString();
     });
     return regionCode;
   }
@@ -113,26 +113,23 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
           phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
-      final regionInfoPtr = arena.using<Pointer<bindings.RegionInfo>>(
-        nativeLibphonenumber.getRegionInfo(phoneNumberPtr, isoCodePtr),
+      final regionInfoPtr =
+          arena.using<Pointer<MutableLibPhoneNumberResult_DrRegionInfo>>(
+        nativeLibphonenumber.get_region_info(phoneNumberPtr, isoCodePtr),
         (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
+      _handleFfiError(regionInfoPtr.ref.error);
 
+      final drRegionInfo = regionInfoPtr.ref.data.ref;
       regionInfo = RegionInfo(
-        regionCode: regionInfoPtr.ref.regionCode,
-        countryCode: regionInfoPtr.ref.countryCode.cast<Utf8>().toDartString(),
-        phoneNumberValue: regionInfoPtr.ref.phoneNumberValue,
+        regionCode: drRegionInfo.regionCode,
+        countryCode: drRegionInfo.countryCode.cast<Utf8>().toDartString(),
+        phoneNumberValue: drRegionInfo.phoneNumberValue,
         formattedPhoneNumber:
-            regionInfoPtr.ref.formattedNumber.cast<Utf8>().toDartString(),
+            drRegionInfo.formattedNumber.cast<Utf8>().toDartString(),
       );
     });
     return regionInfo;
-  }
-
-  @override
-  void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
-    // DO NOTHING.
-    // We should try to archive Desktop version for testing.
   }
 
   @override
@@ -146,9 +143,12 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
           phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
-      isValidPhoneNumber =
-          nativeLibphonenumber.isValidPhoneNumber(phoneNumberPtr, isoCodePtr) ==
-              1;
+      final result = nativeLibphonenumber.is_valid_phone_number(
+        phoneNumberPtr,
+        isoCodePtr,
+      );
+      _handleFfiError(result.ref.error);
+      isValidPhoneNumber = result.ref.data == 1;
     });
     return isValidPhoneNumber;
   }
@@ -163,5 +163,23 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
       isoCode: isoCode,
       numberFormat: PhoneNumberFormat.e164,
     );
+  }
+
+  @override
+  void initMockForTesting(Future<dynamic>? Function(MethodCall call)? handler) {
+    // DO NOTHING.
+    // We should try to archive Desktop version for testing.
+  }
+
+  void _handleFfiError(Pointer<Char> error) {
+    if (error == nullptr) {
+      return;
+    }
+    final errorValue = error.cast<Utf8>().toDartString();
+    if (isBlank(errorValue)) {
+      return;
+    }
+
+    throw DrLibphonenumberException(errorValue);
   }
 }
