@@ -11,9 +11,12 @@ A new Flutter project.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Tech Creator' => 'taboosun1996@gmail.com' }
   s.source           = { :path => '.' }
+  s.public_header_files = 'Classes**/*.h'
   s.source_files     = 'Classes/**/*'
+  s.vendored_frameworks = 'DrLibPhonenumber.xcframework'
+    
   s.dependency 'FlutterMacOS'
 
   s.platform = :osx, '10.11'

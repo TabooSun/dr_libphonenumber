@@ -1,0 +1,22 @@
+PODS:
+  - dr_libphonenumber (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - dr_libphonenumber (from `Flutter/ephemeral/.symlinks/plugins/dr_libphonenumber/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  dr_libphonenumber:
+    :path: Flutter/ephemeral/.symlinks/plugins/dr_libphonenumber/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  dr_libphonenumber: 397b160ea3457062f138d75a8b3b9af2d419cd3f
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.11.3

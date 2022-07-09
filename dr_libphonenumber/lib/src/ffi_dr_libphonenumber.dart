@@ -19,7 +19,9 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
         ..providesSymbol('');
     }
 
-    if (Platform.isMacOS) {
+    if (Platform.environment.containsKey('FLUTTER_TEST') &&
+        Platform.environment['FLUTTER_TEST'] == 'true' &&
+        Platform.isMacOS) {
       const libPath =
           'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
       if (!File(libPath).existsSync()) {
