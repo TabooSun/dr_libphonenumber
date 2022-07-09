@@ -6,10 +6,10 @@ void main() {
   const isoCode = 'MY';
   group(
     'Format phone number',
-        () {
+    () {
       test(
         'Format phone number in e164 format.',
-            () {
+        () {
           expect(
             DrLibphonenumber.format(
               phoneNumber: phoneNumber,
@@ -22,7 +22,7 @@ void main() {
       );
       test(
         'Format phone number in international format.',
-            () {
+        () {
           expect(
             DrLibphonenumber.format(
               phoneNumber: phoneNumber,
@@ -35,7 +35,7 @@ void main() {
       );
       test(
         'Format phone number in international format.',
-            () {
+        () {
           expect(
             DrLibphonenumber.format(
               phoneNumber: phoneNumber,
@@ -48,7 +48,7 @@ void main() {
       );
       test(
         'Format phone number in international format.',
-            () {
+        () {
           expect(
             DrLibphonenumber.format(
               phoneNumber: phoneNumber,
@@ -61,7 +61,7 @@ void main() {
       );
       test(
         'Format phone number with lowercase iso code.',
-            () {
+        () {
           expect(
             DrLibphonenumber.format(
               phoneNumber: phoneNumber,
@@ -74,9 +74,9 @@ void main() {
       );
       test(
         'Format invalid phone number in e164 format.',
-            () {
+        () {
           expect(
-                () => DrLibphonenumber.format(
+            () => DrLibphonenumber.format(
               phoneNumber: '0',
               isoCode: isoCode,
               numberFormat: PhoneNumberFormat.e164,
@@ -90,7 +90,7 @@ void main() {
 
   test(
     'Get number type from phone number and iso code.',
-        () {
+    () {
       expect(
         DrLibphonenumber.getNumberType(
           phoneNumber: phoneNumber,
@@ -102,7 +102,7 @@ void main() {
   );
   test(
     'Get region code from country code.',
-        () {
+    () {
       expect(
         DrLibphonenumber.getRegionCodeForCountryCode(60),
         isoCode,
@@ -111,7 +111,7 @@ void main() {
   );
   test(
     'Get region info from phone number and iso code.',
-        () {
+    () {
       expect(
         DrLibphonenumber.getRegionInfo(
           phoneNumber: phoneNumber,

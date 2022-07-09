@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+part 'src/exceptions/dr_libphonenumber_exception.dart';
+
 part 'src/null_dr_libphonenumber.dart';
 
 part 'src/phone_number_format.dart';
@@ -12,8 +14,6 @@ part 'src/phone_number_format.dart';
 part 'src/phone_number_type.dart';
 
 part 'src/region_info.dart';
-
-part 'src/exceptions/dr_libphonenumber_exception.dart';
 
 abstract class DrLibphonenumberPlatform extends PlatformInterface {
   static final Object _token = Object();
@@ -32,6 +32,24 @@ abstract class DrLibphonenumberPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  String? format({
+    required String phoneNumber,
+    required String isoCode,
+    PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
+  });
+
+  PhoneNumberType getNumberType({
+    required String phoneNumber,
+    required String isoCode,
+  });
+
+  String? getRegionCodeForCountryCode(int callingCode);
+
+  RegionInfo? getRegionInfo({
+    required String phoneNumber,
+    required String isoCode,
+  });
+
   bool isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
@@ -41,22 +59,4 @@ abstract class DrLibphonenumberPlatform extends PlatformInterface {
     required String phoneNumber,
     required String isoCode,
   });
-
-  RegionInfo? getRegionInfo({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  PhoneNumberType getNumberType({
-    required String phoneNumber,
-    required String isoCode,
-  });
-
-  String? format({
-    required String phoneNumber,
-    required String isoCode,
-    PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
-  });
-
-  String? getRegionCodeForCountryCode(int callingCode);
 }

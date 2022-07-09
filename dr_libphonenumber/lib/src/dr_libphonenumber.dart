@@ -17,6 +17,38 @@ class DrLibphonenumber {
     return DrLibphonenumberPlatform.instance;
   }
 
+  static String? format({
+    required String phoneNumber,
+    required String isoCode,
+    PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
+  }) =>
+      _drLibphonenumberPlatform.format(
+        phoneNumber: phoneNumber,
+        isoCode: isoCode,
+        numberFormat: numberFormat,
+      );
+
+  static PhoneNumberType getNumberType({
+    required String phoneNumber,
+    required String isoCode,
+  }) =>
+      _drLibphonenumberPlatform.getNumberType(
+        phoneNumber: phoneNumber,
+        isoCode: isoCode,
+      );
+
+  static String? getRegionCodeForCountryCode(int callingCode) =>
+      _drLibphonenumberPlatform.getRegionCodeForCountryCode(callingCode);
+
+  static RegionInfo? getRegionInfo({
+    required String phoneNumber,
+    required String isoCode,
+  }) =>
+      _drLibphonenumberPlatform.getRegionInfo(
+        phoneNumber: phoneNumber,
+        isoCode: isoCode,
+      );
+
   static bool isValidPhoneNumber({
     required String phoneNumber,
     required String isoCode,
@@ -34,36 +66,4 @@ class DrLibphonenumber {
         phoneNumber: phoneNumber,
         isoCode: isoCode,
       );
-
-  static RegionInfo? getRegionInfo({
-    required String phoneNumber,
-    required String isoCode,
-  }) =>
-      _drLibphonenumberPlatform.getRegionInfo(
-        phoneNumber: phoneNumber,
-        isoCode: isoCode,
-      );
-
-  static PhoneNumberType getNumberType({
-    required String phoneNumber,
-    required String isoCode,
-  }) =>
-      _drLibphonenumberPlatform.getNumberType(
-        phoneNumber: phoneNumber,
-        isoCode: isoCode,
-      );
-
-  static String? format({
-    required String phoneNumber,
-    required String isoCode,
-    PhoneNumberFormat numberFormat = PhoneNumberFormat.rfc3966,
-  }) =>
-      _drLibphonenumberPlatform.format(
-        phoneNumber: phoneNumber,
-        isoCode: isoCode,
-        numberFormat: numberFormat,
-      );
-
-  static String? getRegionCodeForCountryCode(int callingCode) =>
-      _drLibphonenumberPlatform.getRegionCodeForCountryCode(callingCode);
 }

@@ -12,7 +12,6 @@ public class SwiftDrLibphonenumberPlugin: NSObject, FlutterPlugin {
 
   public static func dummyMethodToEnforceBundling() {
     format(nil, nil, DrPhoneNumberFormat.init(0))
-    format_as_you_type(nil, nil, DrPhoneNumberFormat.init(0))
     get_number_type(nil, nil)
     get_region_code_for_country_code(60)
     get_region_info(nil, nil)

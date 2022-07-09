@@ -44,28 +44,6 @@ class DrLibphonenumberBindings {
       ffi.Pointer<MutableLibPhoneNumberResult_c_char> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
-  ffi.Pointer<MutableLibPhoneNumberResult_c_char> format_as_you_type(
-    ffi.Pointer<ffi.Char> phoneNumber,
-    ffi.Pointer<ffi.Char> isoCode,
-    int phoneNumberFormat,
-  ) {
-    return _format_as_you_type(
-      phoneNumber,
-      isoCode,
-      phoneNumberFormat,
-    );
-  }
-
-  late final _format_as_you_typePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<MutableLibPhoneNumberResult_c_char> Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>,
-              ffi.Int32)>>('format_as_you_type');
-  late final _format_as_you_type = _format_as_you_typePtr.asFunction<
-      ffi.Pointer<MutableLibPhoneNumberResult_c_char> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
-
   ffi.Pointer<LibPhoneNumberResult_DrPhoneNumberType> get_number_type(
     ffi.Pointer<ffi.Char> phoneNumber,
     ffi.Pointer<ffi.Char> isoCode,

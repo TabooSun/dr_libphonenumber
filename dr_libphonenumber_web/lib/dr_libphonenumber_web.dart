@@ -24,9 +24,9 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }) {
     try {
       return phoneNumberUtil.format(
-            phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
-            numberFormat.index,
-          );
+        phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
+        numberFormat.index,
+      );
     } catch (e) {
       throw DrLibphonenumberException(e.toString());
     }
@@ -39,9 +39,9 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }) {
     try {
       return PhoneNumberType.values[phoneNumberUtil.getNumberType(
-            phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
-            isoCode,
-          )];
+        phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase()),
+        isoCode,
+      )];
     } catch (e) {
       throw DrLibphonenumberException(e.toString());
     }
@@ -62,15 +62,16 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
     required String isoCode,
   }) {
     try {
-      final telNumber = phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase());
+      final telNumber =
+          phoneNumberUtil.parse(phoneNumber, isoCode.toUpperCase());
 
       return RegionInfo(
-            formattedPhoneNumber:
-                phoneNumberUtil.format(telNumber, PhoneNumberFormat.national.index),
-            phoneNumberValue: telNumber.getNationalNumber(),
-            countryCode: phoneNumberUtil.getRegionCodeForNumber(telNumber),
-            regionCode: telNumber.getCountryCode(),
-          );
+        formattedPhoneNumber:
+            phoneNumberUtil.format(telNumber, PhoneNumberFormat.national.index),
+        phoneNumberValue: telNumber.getNationalNumber(),
+        countryCode: phoneNumberUtil.getRegionCodeForNumber(telNumber),
+        regionCode: telNumber.getCountryCode(),
+      );
     } catch (e) {
       throw DrLibphonenumberException(e.toString());
     }
@@ -83,11 +84,11 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }) {
     try {
       return phoneNumberUtil.isValidNumber(
-            phoneNumberUtil.parse(
-              phoneNumber,
-              isoCode.toUpperCase(),
-            ),
-          );
+        phoneNumberUtil.parse(
+          phoneNumber,
+          isoCode.toUpperCase(),
+        ),
+      );
     } catch (e) {
       throw DrLibphonenumberException(e.toString());
     }
@@ -100,10 +101,10 @@ class DrLibphonenumberWeb extends DrLibphonenumberPlatform {
   }) {
     try {
       return format(
-            phoneNumber: phoneNumber,
-            isoCode: isoCode,
-            numberFormat: PhoneNumberFormat.e164,
-          );
+        phoneNumber: phoneNumber,
+        isoCode: isoCode,
+        numberFormat: PhoneNumberFormat.e164,
+      );
     } catch (e) {
       throw DrLibphonenumberException(e.toString());
     }

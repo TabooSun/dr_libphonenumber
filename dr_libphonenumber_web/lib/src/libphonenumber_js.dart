@@ -50,9 +50,3 @@ class PhoneNumber {
   @JS()
   external int getNationalNumber();
 }
-
-@JS()
-class AsYouTypeFormatter {
-  @JS()
-  external String inputDigit(String digit);
-}

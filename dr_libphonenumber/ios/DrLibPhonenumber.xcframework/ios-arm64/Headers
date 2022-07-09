@@ -148,10 +148,6 @@ struct MutableLibPhoneNumberResult_c_char *format(const char *phoneNumber,
                                                   const char *isoCode,
                                                   enum DrPhoneNumberFormat phoneNumberFormat);
 
-struct MutableLibPhoneNumberResult_c_char *format_as_you_type(const char *phoneNumber,
-                                                              const char *isoCode,
-                                                              enum DrPhoneNumberFormat phoneNumberFormat);
-
 struct LibPhoneNumberResult_DrPhoneNumberType *get_number_type(const char *phoneNumber,
                                                                const char *isoCode);
 
