@@ -79,7 +79,10 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
       final result =
-          nativeLibphonenumber.get_number_type(phoneNumberPtr, isoCodePtr);
+          arena.using<Pointer<LibPhoneNumberResult_DrPhoneNumberType>>(
+        nativeLibphonenumber.get_number_type(phoneNumberPtr, isoCodePtr),
+        (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
+      );
       _handleFfiError(result.ref.error);
 
       phoneNumberType = PhoneNumberTypeHelper.parse(
@@ -147,9 +150,12 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
           phoneNumber.toNativeUtf8(allocator: arena).cast<Char>();
       final isoCodePtr = isoCode.toNativeUtf8(allocator: arena).cast<Char>();
 
-      final result = nativeLibphonenumber.is_valid_phone_number(
-        phoneNumberPtr,
-        isoCodePtr,
+      final result = arena.using<Pointer<LibPhoneNumberResult_bool>>(
+        nativeLibphonenumber.is_valid_phone_number(
+          phoneNumberPtr,
+          isoCodePtr,
+        ),
+        (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
       _handleFfiError(result.ref.error);
       isValidPhoneNumber = result.ref.data == 1;
