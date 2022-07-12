@@ -1,6 +1,7 @@
 name: dr_libphonenumber
 description: A new Flutter project.
-version: 0.0.1
+version: 1.0.0
+publish_to: none
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -17,20 +18,13 @@ dependencies:
   dr_libphonenumber_platform_interface:
     git:
       url: https://github.com/TabooSun/dr_libphonenumber.git
-      ref: v0.0.1
+      ref: v1.0.0-dr_libphonenumber_platform_interface
       path: dr_libphonenumber_platform_interface
-
   dr_libphonenumber_web:
     git:
       url: https://github.com/TabooSun/dr_libphonenumber.git
-      ref: v0.0.1
+      ref: v1.0.0-dr_libphonenumber_web
       path: dr_libphonenumber_web
-
-dependency_overrides:
-  dr_libphonenumber_platform_interface:
-    path: ../dr_libphonenumber_platform_interface
-  dr_libphonenumber_web:
-    path: ../dr_libphonenumber_web
 
 dev_dependencies:
   taboosun_lints:
