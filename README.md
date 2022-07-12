@@ -65,4 +65,7 @@ Check [here](https://github.com/TabooSun/flutter-rust-ffi) for the rest.
 2. Run `make all`.
 
 ## Generate Dart bindings
-1. Run `flutter pub run ffigen --config ffigen_config.yaml`.
+1. Run
+    ```shell
+    flutter pub run ffigen --config ffigen_config.yaml
+    ```
