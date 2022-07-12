@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef enum DrPhoneNumberFormat {
   /**
@@ -116,19 +117,19 @@ typedef struct DrRegionInfo {
   /**
    * The region code or calling code.
    */
-  uint16_t regionCode;
+  uint16_t region_code;
   /**
    * The phone number excluding the [region_code].
    */
-  uint64_t phoneNumberValue;
+  uint64_t phone_number_value;
   /**
    * The country code.
    */
-  char *countryCode;
+  char *country_code;
   /**
    * The formatted phone number with combination of [region_code] & [phone_number_value].
    */
-  char *formattedNumber;
+  char *formatted_number;
 } DrRegionInfo;
 
 typedef struct MutableLibPhoneNumberResult_DrRegionInfo {
@@ -144,19 +145,19 @@ typedef struct LibPhoneNumberResult_bool {
 /**
  * Format the [phone_number] using the [phone_number_format].
  */
-struct MutableLibPhoneNumberResult_c_char *format(const char *phoneNumber,
-                                                  const char *isoCode,
-                                                  enum DrPhoneNumberFormat phoneNumberFormat);
+struct MutableLibPhoneNumberResult_c_char *format(const char *phone_number,
+                                                  const char *iso_code,
+                                                  enum DrPhoneNumberFormat phone_number_format);
 
-struct LibPhoneNumberResult_DrPhoneNumberType *get_number_type(const char *phoneNumber,
-                                                               const char *isoCode);
+struct LibPhoneNumberResult_DrPhoneNumberType *get_number_type(const char *phone_number,
+                                                               const char *iso_code);
 
-struct MutableLibPhoneNumberResult_c_char *get_region_code_for_country_code(uint16_t callingCode);
+struct MutableLibPhoneNumberResult_c_char *get_region_code_for_country_code(uint16_t calling_code);
 
-struct MutableLibPhoneNumberResult_DrRegionInfo *get_region_info(const char *phoneNumber,
-                                                                 const char *isoCode);
+struct MutableLibPhoneNumberResult_DrRegionInfo *get_region_info(const char *phone_number,
+                                                                 const char *iso_code);
 
-struct LibPhoneNumberResult_bool *is_valid_phone_number(const char *phoneNumber,
-                                                        const char *isoCode);
+struct LibPhoneNumberResult_bool *is_valid_phone_number(const char *phone_number,
+                                                        const char *iso_code);
 
-void free_memory(void *unsafeStruct);
+void free_memory(void *unsafe_struct);
