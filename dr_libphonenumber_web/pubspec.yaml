@@ -1,6 +1,7 @@
 name: dr_libphonenumber_web
 description: A simple command-line application.
 version: 1.0.0
+publish_to: none
 # homepage: https://www.example.com
 
 environment:
@@ -16,12 +17,8 @@ dependencies:
   dr_libphonenumber_platform_interface:
     git:
       url: https://github.com/TabooSun/dr_libphonenumber.git
-      ref: v0.0.1
+      ref: v1.0.0-dr_libphonenumber_platform_interface
       path: dr_libphonenumber_platform_interface
-
-dependency_overrides:
-  dr_libphonenumber_platform_interface:
-    path: ../dr_libphonenumber_platform_interface
 
 dev_dependencies:
   flutter_test:
