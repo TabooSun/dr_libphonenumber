@@ -25,6 +25,10 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  taboosun_lints:
+    git:
+      url: https://github.com/TabooSun/dart_taboosun_lints.git
+      ref: v1.1.3
   flutter_test:
     sdk: flutter
   integration_test:

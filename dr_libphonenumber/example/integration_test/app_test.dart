@@ -8,7 +8,7 @@ void main() {
   testWidgets(
     'Example app smoke test',
     (WidgetTester tester) async {
-      await tester.pumpWidget(app.MyApp());
+      await tester.pumpWidget(const app.MyApp());
 
       expect(find.text('-'), findsOneWidget);
 
