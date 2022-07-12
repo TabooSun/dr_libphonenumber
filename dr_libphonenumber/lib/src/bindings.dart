@@ -23,14 +23,14 @@ class DrLibphonenumberBindings {
 
   /// Format the [phone_number] using the [phone_number_format].
   ffi.Pointer<MutableLibPhoneNumberResult_c_char> format(
-    ffi.Pointer<ffi.Char> phoneNumber,
-    ffi.Pointer<ffi.Char> isoCode,
-    int phoneNumberFormat,
+    ffi.Pointer<ffi.Char> phone_number,
+    ffi.Pointer<ffi.Char> iso_code,
+    int phone_number_format,
   ) {
     return _format(
-      phoneNumber,
-      isoCode,
-      phoneNumberFormat,
+      phone_number,
+      iso_code,
+      phone_number_format,
     );
   }
 
@@ -45,12 +45,12 @@ class DrLibphonenumberBindings {
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
   ffi.Pointer<LibPhoneNumberResult_DrPhoneNumberType> get_number_type(
-    ffi.Pointer<ffi.Char> phoneNumber,
-    ffi.Pointer<ffi.Char> isoCode,
+    ffi.Pointer<ffi.Char> phone_number,
+    ffi.Pointer<ffi.Char> iso_code,
   ) {
     return _get_number_type(
-      phoneNumber,
-      isoCode,
+      phone_number,
+      iso_code,
     );
   }
 
@@ -65,10 +65,10 @@ class DrLibphonenumberBindings {
 
   ffi.Pointer<MutableLibPhoneNumberResult_c_char>
       get_region_code_for_country_code(
-    int callingCode,
+    int calling_code,
   ) {
     return _get_region_code_for_country_code(
-      callingCode,
+      calling_code,
     );
   }
 
@@ -81,12 +81,12 @@ class DrLibphonenumberBindings {
           ffi.Pointer<MutableLibPhoneNumberResult_c_char> Function(int)>();
 
   ffi.Pointer<MutableLibPhoneNumberResult_DrRegionInfo> get_region_info(
-    ffi.Pointer<ffi.Char> phoneNumber,
-    ffi.Pointer<ffi.Char> isoCode,
+    ffi.Pointer<ffi.Char> phone_number,
+    ffi.Pointer<ffi.Char> iso_code,
   ) {
     return _get_region_info(
-      phoneNumber,
-      isoCode,
+      phone_number,
+      iso_code,
     );
   }
 
@@ -100,12 +100,12 @@ class DrLibphonenumberBindings {
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
   ffi.Pointer<LibPhoneNumberResult_bool> is_valid_phone_number(
-    ffi.Pointer<ffi.Char> phoneNumber,
-    ffi.Pointer<ffi.Char> isoCode,
+    ffi.Pointer<ffi.Char> phone_number,
+    ffi.Pointer<ffi.Char> iso_code,
   ) {
     return _is_valid_phone_number(
-      phoneNumber,
-      isoCode,
+      phone_number,
+      iso_code,
     );
   }
 
@@ -118,10 +118,10 @@ class DrLibphonenumberBindings {
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
   void free_memory(
-    ffi.Pointer<ffi.Void> unsafeStruct,
+    ffi.Pointer<ffi.Void> unsafe_struct,
   ) {
     return _free_memory(
-      unsafeStruct,
+      unsafe_struct,
     );
   }
 
@@ -317,17 +317,17 @@ class LibPhoneNumberResult_DrPhoneNumberType extends ffi.Struct {
 class DrRegionInfo extends ffi.Struct {
   /// The region code or calling code.
   @ffi.Uint16()
-  external int regionCode;
+  external int region_code;
 
   /// The phone number excluding the [region_code].
   @ffi.Uint64()
-  external int phoneNumberValue;
+  external int phone_number_value;
 
   /// The country code.
-  external ffi.Pointer<ffi.Char> countryCode;
+  external ffi.Pointer<ffi.Char> country_code;
 
   /// The formatted phone number with combination of [region_code] & [phone_number_value].
-  external ffi.Pointer<ffi.Char> formattedNumber;
+  external ffi.Pointer<ffi.Char> formatted_number;
 }
 
 class MutableLibPhoneNumberResult_DrRegionInfo extends ffi.Struct {
@@ -337,8 +337,8 @@ class MutableLibPhoneNumberResult_DrRegionInfo extends ffi.Struct {
 }
 
 class LibPhoneNumberResult_bool extends ffi.Struct {
-  @ffi.Int()
-  external int data;
+  @ffi.Bool()
+  external bool data;
 
   external ffi.Pointer<ffi.Char> error;
 }
@@ -508,3 +508,9 @@ const int WINT_MAX = 2147483647;
 const int SIG_ATOMIC_MIN = -2147483648;
 
 const int SIG_ATOMIC_MAX = 2147483647;
+
+const int true1 = 1;
+
+const int false1 = 0;
+
+const int __bool_true_false_are_defined = 1;

@@ -129,11 +129,11 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
 
       final drRegionInfo = regionInfoPtr.ref.data.ref;
       regionInfo = RegionInfo(
-        regionCode: drRegionInfo.regionCode,
-        countryCode: drRegionInfo.countryCode.cast<Utf8>().toDartString(),
-        phoneNumberValue: drRegionInfo.phoneNumberValue,
+        regionCode: drRegionInfo.region_code,
+        countryCode: drRegionInfo.country_code.cast<Utf8>().toDartString(),
+        phoneNumberValue: drRegionInfo.phone_number_value,
         formattedPhoneNumber:
-            drRegionInfo.formattedNumber.cast<Utf8>().toDartString(),
+            drRegionInfo.formatted_number.cast<Utf8>().toDartString(),
       );
     });
     return regionInfo;
@@ -158,7 +158,7 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
         (ptr) => nativeLibphonenumber.free_memory(ptr.cast<Void>()),
       );
       _handleFfiError(result.ref.error);
-      isValidPhoneNumber = result.ref.data == 1;
+      isValidPhoneNumber = result.ref.data;
     });
     return isValidPhoneNumber;
   }
