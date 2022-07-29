@@ -22,9 +22,7 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     if (Platform.environment.containsKey('FLUTTER_TEST') &&
         Platform.environment['FLUTTER_TEST'] == 'true' &&
         (Platform.isMacOS || Platform.isWindows)) {
-      final libPath = Platform.isWindows
-          ? 'native/artifacts/x86_64-pc-windows-gnu/libdr_libphonenumber.dll'
-          : 'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
+      final String libPath = _detectLibraryByDevice();
       if (!File(libPath).existsSync()) {
         throw Exception(
           '$libPath not found. Please make sure that you have built all the Rust targets.',
@@ -35,6 +33,17 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     }
 
     return DynamicLibrary.process();
+  }
+
+  static String _detectLibraryByDevice() {
+    const artifactsDirPath = 'native/artifacts';
+    if (Platform.isWindows) {
+      return '$artifactsDirPath/x86_64-pc-windows-gnu/libdr_libphonenumber.dll';
+    }
+    return '$artifactsDirPath/x86_64-apple-darwin/libdr_libphonenumber.dylib';
+    // Flutter still doesn't support Apple Silicon. Retained for future.
+    // ignore: dead_code
+    return '$artifactsDirPath/aarch64-apple-darwin/libdr_libphonenumber.dylib';
   }
 
   @override
