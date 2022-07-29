@@ -21,9 +21,10 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
 
     if (Platform.environment.containsKey('FLUTTER_TEST') &&
         Platform.environment['FLUTTER_TEST'] == 'true' &&
-        Platform.isMacOS) {
-      const libPath =
-          'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
+        (Platform.isMacOS || Platform.isWindows)) {
+      final libPath = Platform.isWindows
+          ? 'native/artifacts/x86_64-pc-windows-gnu/libdr_libphonenumber.dll'
+          : 'native/dr_libphonenumber/target/x86_64-apple-darwin/release/libdr_libphonenumber.dylib';
       if (!File(libPath).existsSync()) {
         throw Exception(
           '$libPath not found. Please make sure that you have built all the Rust targets.',
