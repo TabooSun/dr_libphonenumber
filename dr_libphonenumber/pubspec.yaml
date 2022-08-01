@@ -1,6 +1,6 @@
 name: dr_libphonenumber
 description: A new Flutter project.
-version: 1.0.1
+version: 1.0.2
 publish_to: none
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   ffi: ^2.0.1
   equatable: ^2.0.3
   quiver: ^3.1.0
+  package_config: ^2.1.0
   dr_libphonenumber_platform_interface:
     git:
       url: https://github.com/TabooSun/dr_libphonenumber.git

@@ -5,6 +5,8 @@ import 'package:dr_libphonenumber/src/bindings.dart';
 import 'package:dr_libphonenumber_platform_interface/dr_libphonenumber_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
+import 'package:package_config/package_config.dart';
+import 'package:path/path.dart' as path;
 import 'package:quiver/strings.dart';
 
 class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
@@ -19,8 +21,9 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
         ..providesSymbol('');
     }
 
-    if (Platform.environment.containsKey('FLUTTER_TEST') &&
-        Platform.environment['FLUTTER_TEST'] == 'true' &&
+    const flutterTestKey = 'FLUTTER_TEST';
+    if (Platform.environment.containsKey(flutterTestKey) &&
+        Platform.environment[flutterTestKey] == 'true' &&
         (Platform.isMacOS || Platform.isWindows)) {
       final String libPath = _detectLibraryByDevice();
       if (!File(libPath).existsSync()) {
@@ -36,14 +39,88 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
   }
 
   static String _detectLibraryByDevice() {
-    const artifactsDirPath = 'native/artifacts';
-    if (Platform.isWindows) {
-      return '$artifactsDirPath/x86_64-pc-windows-gnu/libdr_libphonenumber.dll';
+    final package = _findPackage();
+    final drLibphonenumberPackageDir = _findFlutterProjectRoot(
+      relativeTo: Directory(
+        path.joinAll([
+          package.root.toFilePath(windows: Platform.isWindows),
+          // We need to add this entry for this package test module to correctly
+          // figure out the artifacts.
+
+          'dr_libphonenumber/',
+        ]),
+      ),
+    );
+    if (drLibphonenumberPackageDir == null) {
+      throw Exception(
+        'dr_libphonenumber is not found in the current project.',
+      );
     }
-    return '$artifactsDirPath/x86_64-apple-darwin/libdr_libphonenumber.dylib';
+    final drLibphonenumberPackagePath = drLibphonenumberPackageDir.path;
+    final artifactsDirParents = [
+      drLibphonenumberPackagePath,
+      'native/artifacts',
+    ];
+    if (Platform.isWindows) {
+      return path.joinAll([
+        ...artifactsDirParents,
+        'x86_64-pc-windows-gnu/libdr_libphonenumber.dll',
+      ]);
+    }
+    return path.joinAll(
+      [
+        ...artifactsDirParents,
+        'x86_64-apple-darwin/libdr_libphonenumber.dylib',
+      ],
+    );
     // Flutter still doesn't support Apple Silicon. Retained for future.
     // ignore: dead_code
-    return '$artifactsDirPath/aarch64-apple-darwin/libdr_libphonenumber.dylib';
+    return path.joinAll([
+      ...artifactsDirParents,
+      'aarch64-apple-darwin/libdr_libphonenumber.dylib',
+    ]);
+  }
+
+  static Package _findPackage() {
+    final flutterProjectRoot =
+        _findFlutterProjectRoot(relativeTo: Directory.current);
+    if (flutterProjectRoot == null) {
+      throw Exception('Could not find flutter project root.');
+    }
+    final packageConfigFile = File(
+      path.joinAll([
+        flutterProjectRoot.path,
+        '.dart_tool/package_config.json',
+      ]),
+    );
+    final packageConfigJsonString = packageConfigFile.readAsStringSync();
+    final packageConfig = PackageConfig.parseString(
+      packageConfigJsonString,
+      packageConfigFile.uri,
+    );
+    return packageConfig.packages
+        .firstWhere((x) => x.name == 'dr_libphonenumber');
+  }
+
+  static Directory? _findFlutterProjectRoot({
+    required Directory relativeTo,
+  }) {
+    const flutterProjectRootSentinel = 'pubspec.yaml';
+    var flutterProjectRoot = relativeTo;
+    while (true) {
+      if (File(path.join(flutterProjectRoot.path, flutterProjectRootSentinel))
+          .existsSync()) {
+        break;
+      }
+
+      final parent = flutterProjectRoot.parent;
+      if (parent.path == flutterProjectRoot.path) {
+        return null;
+      }
+      flutterProjectRoot = parent;
+    }
+
+    return flutterProjectRoot;
   }
 
   @override
