@@ -157,6 +157,10 @@ struct MutableLibPhoneNumberResult_c_char *get_region_code_for_country_code(uint
 struct MutableLibPhoneNumberResult_DrRegionInfo *get_region_info(const char *phone_number,
                                                                  const char *iso_code);
 
+/**
+ * Check if the [phone_number] is a valid phone number that satisfies all the
+ * [DrPhoneNumberType] except [DrPhoneNumberType.Unknown].
+ */
 struct LibPhoneNumberResult_bool *is_valid_phone_number(const char *phone_number,
                                                         const char *iso_code);
 

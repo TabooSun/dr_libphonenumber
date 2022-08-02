@@ -99,6 +99,8 @@ class DrLibphonenumberBindings {
       ffi.Pointer<MutableLibPhoneNumberResult_DrRegionInfo> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
+  /// Check if the [phone_number] is a valid phone number that satisfies all the
+  /// [DrPhoneNumberType] except [DrPhoneNumberType.Unknown].
   ffi.Pointer<LibPhoneNumberResult_bool> is_valid_phone_number(
     ffi.Pointer<ffi.Char> phone_number,
     ffi.Pointer<ffi.Char> iso_code,
