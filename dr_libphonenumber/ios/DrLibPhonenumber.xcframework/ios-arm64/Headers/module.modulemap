@@ -1,0 +1,4 @@
+module DrLibphonenumber {
+    header "bindings.h"
+    export *
+}

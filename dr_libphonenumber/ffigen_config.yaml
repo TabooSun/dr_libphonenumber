@@ -1,7 +1,7 @@
 output: lib/src/bindings.dart
 headers:
   entry-points:
-    - native/dr_libphonenumber/target/bindings.h
+    - native/dr_libphonenumber/includes/bindings.h
 name: DrLibphonenumberBindings
 llvm-path:
   - '/usr/local/homebrew/opt/llvm'
