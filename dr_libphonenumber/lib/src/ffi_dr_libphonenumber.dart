@@ -59,7 +59,7 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
     final drLibphonenumberPackagePath = drLibphonenumberPackageDir.path;
     final artifactsDirParents = [
       drLibphonenumberPackagePath,
-      'native/artifacts',
+      'test/artifacts',
     ];
     if (Platform.isWindows) {
       return path.joinAll([
