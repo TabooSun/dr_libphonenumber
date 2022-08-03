@@ -16,6 +16,7 @@ dependencies:
   equatable: ^2.0.3
   quiver: ^3.1.0
   package_config: ^2.1.0
+  path: ^1.8.1
   dr_libphonenumber_platform_interface:
     git:
       url: https://github.com/TabooSun/dr_libphonenumber.git
