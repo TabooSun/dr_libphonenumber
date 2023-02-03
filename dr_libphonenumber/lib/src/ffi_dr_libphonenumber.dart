@@ -67,18 +67,22 @@ class FfiDrLibphonenumber extends DrLibphonenumberPlatform {
         'x86_64-pc-windows-gnu/libdr_libphonenumber.dll',
       ]);
     }
+
+    final appleDarwinArchitecture = Process.runSync('arch', []).stdout;
+    if (appleDarwinArchitecture is String &&
+        appleDarwinArchitecture.trim() == 'arm64') {
+      return path.joinAll([
+        ...artifactsDirParents,
+        'aarch64-apple-darwin/libdr_libphonenumber.dylib',
+      ]);
+    }
+
     return path.joinAll(
       [
         ...artifactsDirParents,
         'x86_64-apple-darwin/libdr_libphonenumber.dylib',
       ],
     );
-    // Flutter still doesn't support Apple Silicon. Retained for future.
-    // ignore: dead_code
-    return path.joinAll([
-      ...artifactsDirParents,
-      'aarch64-apple-darwin/libdr_libphonenumber.dylib',
-    ]);
   }
 
   static Package _findPackage() {
