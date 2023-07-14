@@ -1,0 +1,4 @@
+name: dr_libphonenumber
+
+packages:
+  - packages/**

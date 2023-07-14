@@ -1,0 +1,15 @@
+[package]
+name = "dr_libphonenumber"
+version = "0.0.0"
+edition = "2021"
+authors = ["TabooSun <taboosun1996@gmail.com>"]
+
+[lib]
+crate-type = ["staticlib", "cdylib"]
+
+[build-dependencies]
+flutter_rust_bridge_codegen = "1.78.0"
+
+[dependencies]
+flutter_rust_bridge = "1.78.0"
+phonenumber = "0.3.1+8.12.9"
