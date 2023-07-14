@@ -1,0 +1,6 @@
+name: dr_libphonenumber
+
+packages:
+  - dr_libphonenumber
+  - ../dr_libphonenumber_platform_interface
+  - ../dr_libphonenumber_web

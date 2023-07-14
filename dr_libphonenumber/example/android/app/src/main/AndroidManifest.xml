@@ -1,9 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tech_creator.dr_libphonenumber.dr_libphonenumber_example">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
         android:label="dr_libphonenumber_example"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
