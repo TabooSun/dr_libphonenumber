@@ -2,20 +2,26 @@ PODS:
   - Flutter (1.0.0)
   - flutter_dr_libphonenumber (0.0.1):
     - Flutter
+  - integration_test (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_dr_libphonenumber (from `.symlinks/plugins/flutter_dr_libphonenumber/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   flutter_dr_libphonenumber:
     :path: ".symlinks/plugins/flutter_dr_libphonenumber/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_dr_libphonenumber: 5d581f2285f772e0a3d843ffb75d5944f38e07d0
+  integration_test: 13825b8a9334a850581300559b8839134b124670
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 

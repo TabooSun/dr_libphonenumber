@@ -1,4 +1,3 @@
-
 import 'package:flutter_dr_libphonenumber/flutter_dr_libphonenumber.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -114,16 +113,22 @@ void main() {
   test(
     'Get region info from phone number and iso code.',
         () {
+      final regionInfo = LibPhoneNumber.i.getRegionInfo(
+        phoneNumber: phoneNumber,
+        isoCode: isoCode,
+      );
       expect(
-        LibPhoneNumber.i.getRegionInfo(
-          phoneNumber: phoneNumber,
-          isoCode: isoCode,
+        (
+        regionCode: regionInfo.regionCode,
+        countryCode: regionInfo.countryCode,
+        phoneNumberValue: regionInfo.phoneNumberValue,
+        formattedPhoneNumber: regionInfo.formattedPhoneNumber,
         ),
-        DrRegionInfo(
-          regionCode: 60,
-          countryCode: isoCode,
-          phoneNumberValue: 129602189,
-          formattedPhoneNumber: '012-960 2189',
+        (
+        regionCode: 60,
+        countryCode: isoCode,
+        phoneNumberValue: 129602189,
+        formattedPhoneNumber: '012-960 2189',
         ),
       );
     },
