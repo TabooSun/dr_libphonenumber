@@ -1,0 +1,14 @@
+{
+  "name": "dr_libphonenumber",
+  "collaborators": [
+    "TabooSun <taboosun1996@gmail.com>"
+  ],
+  "version": "0.0.0",
+  "files": [
+    "dr_libphonenumber_bg.wasm",
+    "dr_libphonenumber.js",
+    "dr_libphonenumber.d.ts"
+  ],
+  "browser": "dr_libphonenumber.js",
+  "types": "dr_libphonenumber.d.ts"
+}

@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use flutter_rust_bridge::{frb, SyncReturn};
+use flutter_rust_bridge::SyncReturn;
 use phonenumber::{Mode, PhoneNumber};
 use phonenumber::country::Id;
 use phonenumber::metadata::DATABASE;

@@ -22,7 +22,13 @@ build-apple: cargo-build
 build-win-linux: cargo-build
     sh ./scripts/build-win-linux.sh
 
-build-all: build-android build-apple build-win-linux
+build-web: cargo-build
+    sh ./scripts/build-web.sh
+
+build-all: build-android build-apple build-win-linux build-web
+
+run-web-server-for-testing:
+   sh ./scripts/run-web-server-for-testing.sh
 
 #generate-bindings:
 #    #!/usr/bin/env sh

@@ -1,26 +1,20 @@
-name: flutter_dr_libphonenumber
-description: A new Flutter FFI plugin project.
+name: dr_libphonenumber_web
+description: A new Flutter project.
 version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  sdk: '>=3.0.5 <4.0.0'
   flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   plugin_platform_interface: ^2.0.2
-  dr_libphonenumber:
-    path:
-      ../dr_libphonenumber
-  dr_libphonenumber_web:
-    path:
-      ../dr_libphonenumber_web
 
 dev_dependencies:
-  ffi: ^2.0.1
-  ffigen: ^6.1.2
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
@@ -40,22 +34,11 @@ flutter:
   # This is required for using `dart:ffi`.
   # All these are used by the tooling to maintain consistency when
   # adding or updating assets for this project.
-  #
-  # Please refer to README.md for a detailed explanation.
   plugin:
     platforms:
-      android:
-        ffiPlugin: true
-      ios:
-        ffiPlugin: true
-      linux:
-        ffiPlugin: true
-      macos:
-        ffiPlugin: true
-      windows:
-        ffiPlugin: true
       web:
-        default_package: dr_libphonenumber_web
+        pluginClass: DrLibphonenumberWebWeb
+        fileName: dr_libphonenumber_web_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
