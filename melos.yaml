@@ -1,4 +1,4 @@
-name: dr_libphonenumber
+name: dr_libphonenumber_workspace
 
 packages:
-  - packages/**
+  - packages/*
